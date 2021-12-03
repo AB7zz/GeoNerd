@@ -83,7 +83,7 @@ io.on('connection', socket => {
     })
 
     socket.on('round-over', () => {
-        socket.emit('winner-disp', rooms[rId])
+        io.to(roomId).emit('winner-disp', rooms[rId])
     })
 
     socket.on('disconnect', () => {

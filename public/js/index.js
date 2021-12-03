@@ -605,15 +605,12 @@ confirPin.addEventListener('click', () => {
 })
 
 nextMap.addEventListener('click', () => {
-    clearInterval(myTim);
-    setTheDamnTimer(59)
     nextCnt++;
     round++;
     roundDis.innerHTML = "<span class='round' style='color: white;'>Round:" + round + "/10</span>";
     if(nextCnt==5){
         socket.emit('round-over', roomId);        
     }
-    confirmPin.innerText = 'Confirm';
     confirPin.disabled = false;
     disDisplay.innerHTML = '';
     initMap();
@@ -689,6 +686,7 @@ socket.on('game-display', rooms => {
 })
 
 socket.on('street-display', (locIndex, Cmode) => {
+    confirmPin.innerText = 'Confirm';
     mode = Cmode;
     initMap();
     let link;
@@ -757,6 +755,7 @@ socket.on('street-display', (locIndex, Cmode) => {
     document.getElementById('destLong').value = destLong;
     destination = parseFloat(destLat) + ',' + parseFloat(destLong);
     console.log('Destination:',destination);
+    clearInterval(myTim);
     setTheDamnTimer(59)
 })
 
@@ -778,13 +777,12 @@ socket.on('player-left', rooms => {
         playersList.innerHTML += "<span><i style='color: green;' class='fas fa-circle'></i> " + rooms[i][4] + "</span><br>";
     }
 })
-
 function setTheDamnTimer(t){
     let f = t;
     myTim = setInterval(() => {
         if(f==0){
-            nextMap.click();
             clearInterval(myTim);
+            nextMap.click();
         }
         if(f>=10){
             timeDis.innerHTML = "<span class='time' style='color: white;'>00:" + f + "</span>";
@@ -811,11 +809,11 @@ socket.on('winner-disp', rooms => {
     }
     console.log(rooms);
     if(rooms.length>=3){
-        winnersList.innerHTML = '<div class="col-md-4"><h2>2nd</h2><span>'+ rooms[0][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + '</span></div><div class="col-md-4"><h2>3rd</h2><span>'+ rooms[2][4] + '</span></div>';
+        winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[0][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + '</span></div><div class="col-md-4"><h2>3rd</h2><span>'+ rooms[2][4] + '</span></div></div>';
     }else if(rooms.length==2){
-        winnersList.innerHTML = '<div class="col-md-4"><h2>2nd</h2><span>'+ rooms[0][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + '</span></div>';
+        winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[0][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + '</span></div></div>';
     }else if(rooms.length==1){
-        winnersList.innerHTML = '<div class="col-md-4"><h2>1st</h2><span>'+ rooms[0][4] + '</span></div>';
+        winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>1st</h2><span>'+ rooms[0][4] + '</span></div></div>';
     }
     
 })

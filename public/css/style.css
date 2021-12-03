@@ -360,6 +360,7 @@ tbody, td, tfoot, th, thead, tr  {
 }
 
 .winner{
+  /* display: flex; */
   display: none;
   background: white !important;
   border-radius: 10px;
