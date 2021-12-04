@@ -599,12 +599,13 @@ function genRandEur(){
 
 
 confirPin.addEventListener('click', () => {
-    confirmPin.innerText = 'Confirmed!';
+    confirPin.innerText = 'Confirmed!';
     disDisplay.innerHTML = '<p>You are <b id="distance"></b> km out!</p>';
     confirPin.disabled = true;
 })
 
 nextMap.addEventListener('click', () => {
+    timer = false;
     nextCnt++;
     round++;
     roundDis.innerHTML = "<span class='round' style='color: white;'>Round:" + round + "/10</span>";
@@ -643,15 +644,18 @@ nextMap.addEventListener('click', () => {
 })
 
 socket.on('display-error', message => {
-    errorMessage.style.display = 'block';
-    errorMessage.innerText = message
+    // errorMessage.style.display = 'block';
+    // errorMessage.innerText = message
+    alert(message);
 })
 
 socket.on('room-created', () => {
     playerId = 1;
     createScreen.style.display = 'none';
     waitingScreen.style.display = 'block';
-    nextMap.style.display = 'block';
+    chooseCreate.disabled = true;
+    chooseJoin.disabled = true;
+    // nextMap.style.display = 'block';
 })
 
 socket.on('host-connected', (host, roomId) => {
@@ -671,6 +675,8 @@ socket.on('room-joined', (roomId, pId) => {
     joinScreen.style.display = 'none';
     chooseStart.style.display = 'none';
     waitingScreen.style.display = 'block';
+    chooseCreate.disable = true;
+    chooseJoin.disable = true;
 })
 
 socket.on('game-display', rooms => {
@@ -684,9 +690,10 @@ socket.on('game-display', rooms => {
         playersScore.innerHTML+='<tr><td style="color: white;">' + rooms[i][4] + '</td><td style="color: white;">0</td></tr>';
     }
 })
-
 socket.on('street-display', (locIndex, Cmode) => {
-    confirmPin.innerText = 'Confirm';
+    var myVar;
+    clearTimeout(myVar);
+    confirPin.innerText = 'Confirm';
     mode = Cmode;
     initMap();
     let link;
@@ -755,8 +762,26 @@ socket.on('street-display', (locIndex, Cmode) => {
     document.getElementById('destLong').value = destLong;
     destination = parseFloat(destLat) + ',' + parseFloat(destLong);
     console.log('Destination:',destination);
-    clearInterval(myTim);
-    setTheDamnTimer(59)
+    function countdown(minutes) {
+        var seconds = 10;
+        var mins = minutes
+        function tick() {
+            var current_minutes = mins-1
+            seconds--;
+            timeDis.innerHTML = "<span class='time' style='color: white;'>00:" + ":" + (seconds < 10 ? "0" : "") + String(seconds) + "</span>";
+            if( seconds > 0 ) {
+                myVar = setTimeout(tick, 1000);
+            }else {
+                if(seconds <= 0){
+                    clearTimeout(myVar);
+                    nextMap.click();         
+                }
+            }
+        }
+        tick();
+    }
+    //You can use this script with a call to onclick, onblur or any other attribute you would like to use. 
+    countdown(1);//where n is the number of minutes required. 
 })
 
 socket.on('score-upd', rooms => {
@@ -764,7 +789,6 @@ socket.on('score-upd', rooms => {
     for(let i=0; i<rooms.length; i++){
         playersScore.innerHTML+='<tr><td style="color: white;">' + rooms[i][4] + '</td><td style="color: white;">' + rooms[i][5] + '</td></tr>'
     }
-
 })
 
 socket.on('player-left', rooms => {
@@ -777,21 +801,20 @@ socket.on('player-left', rooms => {
         playersList.innerHTML += "<span><i style='color: green;' class='fas fa-circle'></i> " + rooms[i][4] + "</span><br>";
     }
 })
-function setTheDamnTimer(t){
-    let f = t;
-    myTim = setInterval(() => {
-        if(f==0){
-            clearInterval(myTim);
-            nextMap.click();
-        }
-        if(f>=10){
-            timeDis.innerHTML = "<span class='time' style='color: white;'>00:" + f + "</span>";
-        }else{
-            timeDis.innerHTML = "<span class='time' style='color: white;'>00:0" + f + "</span>";
-        }
-        --f;
-    }, 1000)
-}
+// function setTheDamnTimer(){
+//     let f = t;
+//     setInterval(() => {
+//         if(f==0){
+//             nextMap.click();
+//         }
+//         if(f>=10){
+//             timeDis.innerHTML = "<span class='time' style='color: white;'>00:" + f + "</span>";
+//         }else{
+//             timeDis.innerHTML = "<span class='time' style='color: white;'>00:0" + f + "</span>";
+//         }
+//         --f;
+//     }, 1000)
+// }
 
 socket.on('winner-disp', rooms => {
     nextMap.style.display = 'none';

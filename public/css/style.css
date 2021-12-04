@@ -313,8 +313,6 @@ main {
 .score-card{
   position: absolute;
   background:#000;
-  /* background:rgba(0, 0, 0, 0.671); */
-  /* z-index: 9999; */
   margin-left: 1380px;
   padding: 15px;
 }

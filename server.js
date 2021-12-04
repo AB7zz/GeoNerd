@@ -14,11 +14,13 @@ let score = 0
 let rId = ''
 let pId = ''
 io.on('connection', socket => {
-    console.log(rooms)
     socket.on('create-room', ({host, mode, roomId}) => {
         Cmode = mode
         rId = roomId
-        if(rooms[roomId]){
+        if(rooms[roomId] && (socket.client.id == rooms[roomId][0][3])){
+            socket.emit('host-connected', host, roomId)
+            socket.emit('room-created', roomId)
+        }else if(rooms[roomId]){
             const message = "A room already exists with id "+ roomId
             socket.emit('display-error', message)
         }else{
@@ -34,8 +36,13 @@ io.on('connection', socket => {
     socket.on('join-room', ({player, roomId}) => {
         rId = roomId
         if(!rooms[roomId]){
-            const message = "No such room exists"
+            const message = "No such room exists"   
             socket.emit('display-error', message)
+            console.log(message)
+        }else if(socket.client.id == rooms[roomId][0][3]){
+            const message = "You cannot join a room you created"   
+            socket.emit('display-error', message)
+            console.log(message)
         }else{
             socket.join(roomId)
             userConnected(socket.client.id)
@@ -83,7 +90,7 @@ io.on('connection', socket => {
     })
 
     socket.on('round-over', () => {
-        io.to(roomId).emit('winner-disp', rooms[rId])
+        io.to(rId).emit('winner-disp', rooms[rId])
     })
 
     socket.on('disconnect', () => {
