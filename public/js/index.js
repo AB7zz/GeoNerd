@@ -763,12 +763,12 @@ socket.on('street-display', (locIndex, Cmode) => {
     destination = parseFloat(destLat) + ',' + parseFloat(destLong);
     console.log('Destination:',destination);
     function countdown(minutes) {
-        var seconds = 10;
+        var seconds = 62;
         var mins = minutes
         function tick() {
             var current_minutes = mins-1
             seconds--;
-            timeDis.innerHTML = "<span class='time' style='color: white;'>00:" + ":" + (seconds < 10 ? "0" : "") + String(seconds) + "</span>";
+            timeDis.innerHTML = "<span class='time' style='color: white;'>00" + ":" + (seconds < 10 ? "0" : "") + String(seconds) + "</span>";
             if( seconds > 0 ) {
                 myVar = setTimeout(tick, 1000);
             }else {
