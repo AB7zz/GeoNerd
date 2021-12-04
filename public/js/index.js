@@ -69,6 +69,7 @@ let locIndex;
 let destination;
 let nextCnt = 0;
 let round = 1;
+let stopCounter = false;
 const chosenLocs = {};
 
 
@@ -602,13 +603,13 @@ confirPin.addEventListener('click', () => {
     confirPin.innerText = 'Confirmed!';
     disDisplay.innerHTML = '<p>You are <b id="distance"></b> km out!</p>';
     confirPin.disabled = true;
+    socket.emit('user-confirmed');
 })
 
 nextMap.addEventListener('click', () => {
-    timer = false;
     nextCnt++;
     round++;
-    roundDis.innerHTML = "<span class='round' style='color: white;'>Round:" + round + "/10</span>";
+    roundDis.innerHTML = "<span class='round' style='color: white;'>Round:" + round + "/5</span>";
     if(nextCnt==5){
         socket.emit('round-over', roomId);        
     }
@@ -763,25 +764,32 @@ socket.on('street-display', (locIndex, Cmode) => {
     destination = parseFloat(destLat) + ',' + parseFloat(destLong);
     console.log('Destination:',destination);
     function countdown(minutes) {
-        var seconds = 62;
+        var seconds = 61;
         var mins = minutes
         function tick() {
             var current_minutes = mins-1
             seconds--;
             timeDis.innerHTML = "<span class='time' style='color: white;'>00" + ":" + (seconds < 10 ? "0" : "") + String(seconds) + "</span>";
-            if( seconds > 0 ) {
+            if( seconds > 0 && !stopCounter) {
                 myVar = setTimeout(tick, 1000);
-            }else {
-                if(seconds <= 0){
-                    clearTimeout(myVar);
-                    nextMap.click();         
-                }
+            }else if(stopCounter){
+                stopCounter = false;
+                console.log('FUCK YEA');
+                clearTimeout(myVar);
+                setTimeout(() => {
+                    nextMap.click();
+                }, 1000);  
+            }else if(seconds <= 0){
+                console.log('ok its false')
+                clearTimeout(myVar);
+                setTimeout(() => {
+                    nextMap.click();
+                }, 1000);         
             }
         }
         tick();
     }
-    //You can use this script with a call to onclick, onblur or any other attribute you would like to use. 
-    countdown(1);//where n is the number of minutes required. 
+    countdown(1); 
 })
 
 socket.on('score-upd', rooms => {
@@ -801,20 +809,6 @@ socket.on('player-left', rooms => {
         playersList.innerHTML += "<span><i style='color: green;' class='fas fa-circle'></i> " + rooms[i][4] + "</span><br>";
     }
 })
-// function setTheDamnTimer(){
-//     let f = t;
-//     setInterval(() => {
-//         if(f==0){
-//             nextMap.click();
-//         }
-//         if(f>=10){
-//             timeDis.innerHTML = "<span class='time' style='color: white;'>00:" + f + "</span>";
-//         }else{
-//             timeDis.innerHTML = "<span class='time' style='color: white;'>00:0" + f + "</span>";
-//         }
-//         --f;
-//     }, 1000)
-// }
 
 socket.on('winner-disp', rooms => {
     nextMap.style.display = 'none';
@@ -839,4 +833,9 @@ socket.on('winner-disp', rooms => {
         winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>1st</h2><span>'+ rooms[0][4] + '</span></div></div>';
     }
     
+})
+
+socket.on('all-users-clicked', () => {
+    stopCounter = true;
+    console.log('ok its true now', stopCounter)
 })

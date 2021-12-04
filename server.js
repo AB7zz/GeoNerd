@@ -13,6 +13,7 @@ let Cmode = 0
 let score = 0
 let rId = ''
 let pId = ''
+let confirmCnt = 0;
 io.on('connection', socket => {
     socket.on('create-room', ({host, mode, roomId}) => {
         Cmode = mode
@@ -87,6 +88,14 @@ io.on('connection', socket => {
         }
         console.log(rooms[roomId])
         io.to(roomId).emit('score-upd', rooms[roomId])
+    })
+
+    socket.on('user-confirmed', () => {
+        confirmCnt++;
+        if(confirmCnt == rooms[rId].length){
+            io.to(rId).emit('all-users-clicked');
+            confirmCnt = 0;
+        }
     })
 
     socket.on('round-over', () => {
