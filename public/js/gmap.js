@@ -3,7 +3,6 @@ function initMap(){
     confirmPin.disabled = true;
     let myLatLng;
     let zoomVal;
-    mode = "world";
     if(mode=="middleeast"){
         myLatLng = { lat: 24.79360866539293, lng: 42.63691120388848 };
         zoomVal = 3;
