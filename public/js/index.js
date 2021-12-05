@@ -103,8 +103,8 @@ const asLocs = ['<iframe src="https://www.google.com/maps/embed?pb=!4v1637763486
 const afLocs = [];
 
 
-chooseCreate.classList.remove('active-btn');
-chooseHome.classList.add('active-btn');
+// chooseCreate.classList.remove('active-btn');
+// chooseHome.classList.add('active-btn');
 
 chooseHome.addEventListener('click', () => {
     createScreen.style.display = 'none';

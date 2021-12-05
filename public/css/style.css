@@ -97,8 +97,8 @@ main {
 }
 
 .main-content .home { 
-    display: flex;
-    /* display: none; */
+    /* display: flex; */
+    display: none;
     justify-content: center;
     align-items: center;
     height: 100%;
@@ -106,8 +106,8 @@ main {
 }
 
 .main-content .create{
-    /* display: flex; */
-    display: none;
+    display: flex;
+    /* display: none; */
     justify-content: center;
     align-items: center;
     height: 100%;
