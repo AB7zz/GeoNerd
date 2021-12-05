@@ -245,8 +245,8 @@ main {
 }
 
 .mode-img{
-  height: 202px;
-  width: 350px;
+  height: auto;
+  width: auto;
 }
 
 .mode-heading{
@@ -265,6 +265,22 @@ main {
   border-color: #864879 !important;
   padding-top: 5px !important;
   padding-bottom: 5px !important;
+}
+
+@media screen and (max-width: 1187px){
+  .mode-btn{
+    font-size: 13px !important;
+  }
+}
+@media screen and (max-width: 1119px){
+  .mode-btn{
+    font-size: 10px !important;
+  }
+}
+@media screen and (max-width: 1059px){
+  .mode-btn{
+    font-size: 8px !important;
+  }
 }
 
 .mode-card-active{

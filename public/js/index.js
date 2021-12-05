@@ -109,6 +109,7 @@ chooseHome.classList.add('active-btn');
 chooseHome.addEventListener('click', () => {
     createScreen.style.display = 'none';
     joinScreen.style.display = 'none';
+    winnersScreen.style.display = 'none';
     waitingScreen.style.display = 'none';
 
     chooseJoin.classList.remove('active-btn');
@@ -120,6 +121,7 @@ chooseHome.addEventListener('click', () => {
 
 chooseCreate.addEventListener('click', () => {
     homeScreen.style.display = 'none';
+    winnersScreen.style.display = 'none';
     joinScreen.style.display = 'none';
     waitingScreen.style.display = 'none';
 
@@ -133,6 +135,7 @@ chooseCreate.addEventListener('click', () => {
 chooseJoin.addEventListener('click', () => {
     homeScreen.style.display = 'none';
     createScreen.style.display = 'none';
+    winnersScreen.style.display = 'none';
     waitingScreen.style.display = 'none';
 
     chooseHome.classList.remove('active-btn');
@@ -762,7 +765,7 @@ socket.on('street-display', (locIndex, Cmode) => {
     document.getElementById('destLat').value = destLat;
     document.getElementById('destLong').value = destLong;
     destination = parseFloat(destLat) + ',' + parseFloat(destLong);
-    console.log('Destination:',destination);
+    // console.log('Destination:',destination);
     function countdown(minutes) {
         var seconds = 61;
         var mins = minutes
@@ -774,13 +777,12 @@ socket.on('street-display', (locIndex, Cmode) => {
                 myVar = setTimeout(tick, 1000);
             }else if(stopCounter){
                 stopCounter = false;
-                console.log('FUCK YEA');
                 clearTimeout(myVar);
                 setTimeout(() => {
                     nextMap.click();
                 }, 1000);  
             }else if(seconds <= 0){
-                console.log('ok its false')
+                // console.log('ok its false')
                 clearTimeout(myVar);
                 setTimeout(() => {
                     nextMap.click();
@@ -824,7 +826,7 @@ socket.on('winner-disp', rooms => {
             }
         }
     }
-    console.log(rooms);
+    // console.log(rooms);
     if(rooms.length>=3){
         winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[0][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + '</span></div><div class="col-md-4"><h2>3rd</h2><span>'+ rooms[2][4] + '</span></div></div>';
     }else if(rooms.length==2){
@@ -837,5 +839,5 @@ socket.on('winner-disp', rooms => {
 
 socket.on('all-users-clicked', () => {
     stopCounter = true;
-    console.log('ok its true now', stopCounter)
+    // console.log('ok its true now', stopCounter)
 })

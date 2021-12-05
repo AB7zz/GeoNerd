@@ -18,7 +18,16 @@ io.on('connection', socket => {
     socket.on('create-room', ({host, mode, roomId}) => {
         Cmode = mode
         rId = roomId
-        if(rooms[roomId] && (socket.client.id == rooms[roomId][0][3])){
+        if(host==""){
+            const message = "Please enter a name"
+            socket.emit('display-error', message)
+        }else if(roomId==""){
+            const message = "Please enter a room name"
+            socket.emit('display-error', message)
+        }else if(mode==""){
+            const message = "Please choose a mode"
+            socket.emit('display-error', message)
+        }else if(rooms[roomId] && (socket.client.id == rooms[roomId][0][3])){
             socket.emit('host-connected', host, roomId)
             socket.emit('room-created', roomId)
         }else if(rooms[roomId]){
@@ -36,7 +45,13 @@ io.on('connection', socket => {
 
     socket.on('join-room', ({player, roomId}) => {
         rId = roomId
-        if(!rooms[roomId]){
+        if(player==""){
+            const message = "Please enter a name"
+            socket.emit('display-error', message)
+        }else if(roomId==""){
+            const message = "Please enter a room name"
+            socket.emit('display-error', message)
+        }else if(!rooms[roomId]){
             const message = "No such room exists"   
             socket.emit('display-error', message)
             console.log(message)
@@ -105,6 +120,7 @@ io.on('connection', socket => {
     socket.on('disconnect', () => {
         if(rooms[rId]){
             if(rooms[rId][0][3]==socket.client.id){
+                io.to(rId).emit('winner-disp', rooms[rId])
                 exitRoom(rId)
             }else{
                 leaveRoom(rId, pId)

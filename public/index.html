@@ -113,24 +113,10 @@
                                 <input type="text" placeholder='Your room name' class='input-box' id='chooseCreateRoom' required>
                             </div>
                         </div>
-                        <!-- <div class="mt-4 mb-4 input-container col-12">
-                            <main>
-                                <form style='background: transparent !important;' oninput="output.value = Math.round(range.valueAsNumber / 1000)">
-                                  <div style='background: transparent !important;' class="range">
-                                    <input style='background: transparent !important;' name="range" type="range" min="2" max="10000">
-                                    <div class="range-output">
-                                      <output class="output" name="output" for="range">
-                                        5
-                                      </output>
-                                    </div>
-                                  </div>
-                                </form>
-                            </main>
-                        </div> -->
                         <div class="mt-4 mb-4 col-12">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                    <div class="col-lg-4 col-md-6 col-sm-6 col-6">
                                         <div id='modeCard1' class="card mb-4">
                                             <img class='mode-img' src="images/world.jpg" alt="image">
                                             <p class='mode-heading'>World</p>
@@ -139,7 +125,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                    <div class="col-lg-4 col-md-6 col-sm-6 col-6">
                                         <div id='modeCard2' class="card mb-4">
                                             <img class='mode-img' src="images/famous.jpg" alt="image">
                                             <p class='mode-heading'>Famous Places</p>
@@ -148,7 +134,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                    <div class="col-lg-4 col-md-6 col-sm-6 col-6">
                                         <div id='modeCard3' class="card mb-4">
                                             <img class='mode-img' src="images/northamerica.jpg" alt="image">
                                             <p class='mode-heading'>North America</p>
@@ -157,7 +143,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                    <div class="col-lg-4 col-md-6 col-sm-6 col-6">
                                         <div id='modeCard4' class="card mb-4">
                                             <img class='mode-img' src="images/southamerica.jpg" alt="image">
                                             <p class='mode-heading'>South America</p>
@@ -166,7 +152,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                    <div class="col-lg-4 col-md-6 col-sm-6 col-6">
                                         <div id='modeCard5' class="card mb-4">
                                             <img class='mode-img' src="images/middleeast.jpg" alt="image">
                                             <p class='mode-heading'>Middle East</p>
@@ -175,7 +161,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                    <div class="col-lg-4 col-md-6 col-sm-6 col-6">
                                         <div id='modeCard6' class="card mb-4">
                                             <img id='modeImg' class='mode-img' src="images/europe.jpg" alt="image">
                                             <p class='mode-heading'>Europe</p>
@@ -184,7 +170,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                    <div class="col-lg-4 col-md-6 col-sm-6 col-6">
                                         <div id='modeCard7' class="card mb-4">
                                             <img class='mode-img' src="images/asia.jpg" alt="image">
                                             <p class='mode-heading'>Asia</p>
@@ -193,7 +179,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                    <div class="col-lg-4 col-md-6 col-sm-6 col-6">
                                         <div id='modeCard8' class="card mb-4">
                                             <img class='mode-img' src="images/australia.jpg" alt="image">
                                             <p class='mode-heading'>Australia</p>
@@ -202,7 +188,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6 col-6">
+                                    <div class="col-lg-4 col-md-6 col-sm-6 col-6">
                                         <div id='modeCard9' class="card mb-4">
                                             <img class='mode-img' src="images/africa.jpg" alt="image">
                                             <p class='mode-heading'>Africa</p>
@@ -293,11 +279,18 @@
         </div>
     </main>
     <div id='gameScreen' class="gameScreen">
-        <div id='street-view' class="stree-view"></div> 
+        <div id='street-view' class="stree-view">
+            <!-- <iframe src="https://www.google.com/maps/embed?pb=!4v1637485175121!6m8!1m7!1sCAoSLEFGMVFpcE5FaEE3TEV2RzROMlJlRkJLWVF1LW05MWFCbWp1dFNmNjhmSVVx!2m2!1d31.414199!2d27.00780599999996!3f278.0911907616493!4f-14.090972151271899!5f0.7820865974627469" style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden;" allowfullscreen="" loading="lazy"></iframe> -->
+        </div> 
         <div class="gameOuterLayer">
             <div class="score-card">
                 <table id='playersScore'>
-                    
+                    <!-- <tr><th>Players</th><th>Score</th></tr>
+                    <tr><td style="color: white;">Abhinav</td><td style="color: white;">100</td></tr>
+                    <tr><td style="color: white;">Abhinav</td><td style="color: white;">100</td></tr>
+                    <tr><td style="color: white;">Abhinav</td><td style="color: white;">100</td></tr>
+                    <tr><td style="color: white;">Abhinav</td><td style="color: white;">100</td></tr>
+                    <tr><td style="color: white;">Abhinav</td><td style="color: white;">100</td></tr> -->
                 </table>
             </div>
             <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmN-pywUQGw-Lpn-uSKm0bo4YCNeGzYLU&callback=initMap&v=weekly&channel=2&libraries=places" async></script>
@@ -313,9 +306,10 @@
             </div>   
             <div class="randt" id="randt">
                 <div id='roundDis'>
+                    <!-- <span class='round' style='color: white;'>2/5</span> -->
                 </div>
                 <div id='timeDis'>
-                    
+                    <!-- <span class='time' style='color: white;'>00:59</span> -->
                 </div>
             </div>
             <div class="nextBtnContainer">

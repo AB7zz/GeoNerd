@@ -3,6 +3,7 @@ function initMap(){
     confirmPin.disabled = true;
     let myLatLng;
     let zoomVal;
+    mode = "world";
     if(mode=="middleeast"){
         myLatLng = { lat: 24.79360866539293, lng: 42.63691120388848 };
         zoomVal = 3;
@@ -85,7 +86,7 @@ function calcDistance(lat1,lat2,lon1,lon2)
 }
 confirmPin.addEventListener('click', () => {
     const origin = parseFloat(document.getElementById("latitude").value) + ',' + parseFloat(document.getElementById("longitude").value);
-    console.log('Origin:', origin);
+    // console.log('Origin:', origin);
 
     // const revGeo = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=VhCAzoCdq1iw3EUcNRezRhbXmIdsfxq9&location='+document.getElementById('latitude').value+','+document.getElementById('longitude').value+'&includeRoadMetadata=true&includeNearestIntersection=true';
     // fetch(revGeo)
@@ -156,8 +157,8 @@ confirmPin.addEventListener('click', () => {
         // }else{
             calcDistance(document.getElementById('latitude').value,document.getElementById('destLat').value,document.getElementById('longitude').value,document.getElementById('destLong').value);
             document.getElementById("distance").innerText = Math.round(distance).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            console.log('ERROR: Google API did not work', distance);
-            console.log(playerId);
+            // console.log('ERROR: Google API did not work', distance);
+            // console.log(playerId);
             socket.emit('score-inc', ({playerId, roomId, distance}));
         // }
 
