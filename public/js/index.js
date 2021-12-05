@@ -395,6 +395,9 @@ chooseCreateConfirm.addEventListener('click', () => {
 
 chooseStart.addEventListener('click', () => {
     socket.emit('start-game', roomId)
+})
+
+socket.on('game-display', rooms => {
     if(mode=="world"){
         genRandWorld();
     }else if(mode=="famous"){
@@ -420,6 +423,15 @@ chooseStart.addEventListener('click', () => {
     }
     else if(mode=="africa"){
         genRandAfr();
+    }
+    roundDis.innerHTML = "<span class='round' style='color: white;'>Round:" + round + "/10</span>";
+    playersScore.innerHTML = '<tr><th>Players</th><th>Score</th></tr>';
+    initMap();
+    startScreen.style.display = 'none';
+    waitingScreen.style.display = 'none';
+    gameScreen.style.display = 'block';
+    for(let i=0; i<rooms.length; i++){
+        playersScore.innerHTML+='<tr><td style="color: white;">' + rooms[i][4] + '</td><td style="color: white;">0</td></tr>';
     }
 })
 
@@ -683,17 +695,7 @@ socket.on('room-joined', (roomId, pId) => {
     chooseJoin.disable = true;
 })
 
-socket.on('game-display', rooms => {
-    roundDis.innerHTML = "<span class='round' style='color: white;'>Round:" + round + "/10</span>";
-    playersScore.innerHTML = '<tr><th>Players</th><th>Score</th></tr>';
-    initMap();
-    startScreen.style.display = 'none';
-    waitingScreen.style.display = 'none';
-    gameScreen.style.display = 'block';
-    for(let i=0; i<rooms.length; i++){
-        playersScore.innerHTML+='<tr><td style="color: white;">' + rooms[i][4] + '</td><td style="color: white;">0</td></tr>';
-    }
-})
+
 socket.on('street-display', (locIndex, Cmode) => {
     var myVar;
     clearTimeout(myVar);
@@ -783,6 +785,7 @@ socket.on('street-display', (locIndex, Cmode) => {
                 }, 1000);  
             }else if(seconds <= 0){
                 // console.log('ok its false')
+                stopCounter = false;
                 clearTimeout(myVar);
                 setTimeout(() => {
                     nextMap.click();
