@@ -73,10 +73,14 @@ io.on('connection', socket => {
 
     socket.on('start-game', roomId => {
         io.to(roomId).emit('game-display', rooms[roomId])
-    })
 
+        
+    })
+    let call = 0;
     socket.on('display-street', ({roomId, locIndex}) => {
+        call++;
         io.to(roomId).emit('street-display', locIndex, Cmode)
+        // console.log('Street display is called',call)
     })
 
     socket.on('score-inc', ({playerId, roomId, distance}) => {
@@ -98,7 +102,7 @@ io.on('connection', socket => {
             rooms[roomId][playerId-1][5] += 100;
         }else if(Math.round(distance) > 7000 && Math.round(distance) < 10000){
             rooms[roomId][playerId-1][5] += 50;
-        }else if(Math.round(distance) > 1000){
+        }else if(Math.round(distance) > 1000){  
             rooms[roomId][playerId-1][5] += 0;
         }
         console.log(rooms[roomId])
@@ -115,6 +119,7 @@ io.on('connection', socket => {
 
     socket.on('round-over', () => {
         io.to(rId).emit('winner-disp', rooms[rId])
+        exitRoom(rId)
     })
 
     socket.on('disconnect', () => {

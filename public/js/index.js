@@ -69,7 +69,6 @@ let locIndex;
 let destination;
 let nextCnt = 0;
 let round = 1;
-let stopCounter = false;
 const chosenLocs = {};
 
 
@@ -439,6 +438,7 @@ function genRandWorld(){
     locIndex = Math.floor(Math.random(worldLocs.length)*worldLocs.length);
     if(!chosenLocs[locIndex]){
         chosenLocs[locIndex] = 1;
+        // console.log('I am calling street-display');
         socket.emit('display-street', ({roomId, locIndex}));
         
         
@@ -620,10 +620,13 @@ confirPin.addEventListener('click', () => {
     confirPin.disabled = true;
     socket.emit('user-confirmed');
 })
-
+let nxt = 0;
 nextMap.addEventListener('click', () => {
+    nxt++;
+    // console.log('nextMap is called', nxt);
     nextCnt++;
     round++;
+    // nextMap.style.display = 'none';
     roundDis.innerHTML = "<span class='round' style='color: white;'>Round:" + round + "/5</span>";
     if(nextCnt==5){
         socket.emit('round-over', roomId);        
@@ -671,7 +674,7 @@ socket.on('room-created', () => {
     waitingScreen.style.display = 'block';
     chooseCreate.disabled = true;
     chooseJoin.disabled = true;
-    // nextMap.style.display = 'block';
+    nextMap.style.display = 'block';
 })
 
 socket.on('host-connected', (host, roomId) => {
@@ -694,11 +697,11 @@ socket.on('room-joined', (roomId, pId) => {
     chooseCreate.disable = true;
     chooseJoin.disable = true;
 })
-
-
+let st = 0;
 socket.on('street-display', (locIndex, Cmode) => {
-    var myVar;
-    clearTimeout(myVar);
+    myVar = null;
+    st++;
+    // console.log('Street display is called', st);
     confirPin.innerText = 'Confirm';
     mode = Cmode;
     initMap();
@@ -768,33 +771,28 @@ socket.on('street-display', (locIndex, Cmode) => {
     document.getElementById('destLong').value = destLong;
     destination = parseFloat(destLat) + ',' + parseFloat(destLong);
     // console.log('Destination:',destination);
-    function countdown(minutes) {
-        var seconds = 61;
-        var mins = minutes
-        function tick() {
-            var current_minutes = mins-1
-            seconds--;
-            timeDis.innerHTML = "<span class='time' style='color: white;'>00" + ":" + (seconds < 10 ? "0" : "") + String(seconds) + "</span>";
-            if( seconds > 0 && !stopCounter) {
-                myVar = setTimeout(tick, 1000);
-            }else if(stopCounter){
-                stopCounter = false;
-                clearTimeout(myVar);
-                setTimeout(() => {
-                    nextMap.click();
-                }, 1000);  
-            }else if(seconds <= 0){
-                // console.log('ok its false')
-                stopCounter = false;
-                clearTimeout(myVar);
-                setTimeout(() => {
-                    nextMap.click();
-                }, 1000);         
-            }
-        }
-        tick();
-    }
-    countdown(1); 
+    
+
+    // function countdown() {
+    //     var seconds = 5;
+    //     function time() {
+    //         if( seconds > 0) {
+    //             seconds--;
+    //             myVar = setTimeout(time, 1000);
+    //             timeDis.innerHTML = "<span class='time' style='color: white;'>00" + ":" + (seconds < 10 ? "0" : "") + String(seconds) + "</span>"; 
+    //             // console.log(seconds) 
+    //         }else if(seconds == 0){
+    //             seconds = 5;
+    //             // console.log('STOP')
+    //             clearTimeout(myVar);
+    //             setTimeout(() => {
+    //                 nextMap.click();
+    //             }, 5000);      
+    //         }
+    //     }
+    //     time();
+    // }
+    // countdown(); 
 })
 
 socket.on('score-upd', rooms => {
@@ -831,9 +829,21 @@ socket.on('winner-disp', rooms => {
     }
     // console.log(rooms);
     if(rooms.length>=3){
-        winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[0][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + '</span></div><div class="col-md-4"><h2>3rd</h2><span>'+ rooms[2][4] + '</span></div></div>';
+        if(rooms[1][5]==rooms[0][5] && rooms[1][5]!=rooms[2][5]){
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + ', ' + rooms[0][4] + '</span></div><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[2][4] + '</span></div></div>';
+        }else if(rooms[1][5]==rooms[2][5] && rooms[1][5]!=rooms[0][5]){
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[1][4] + ', ' + rooms[2][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[0][4] + '</span></div></div>';
+        }else if(rooms[1][5]==rooms[2][5] && rooms[1][5]==rooms[0][5]){
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + ', ' + rooms[2][4] + ', ' + rooms[0][4] + '</span></div></div>';
+        }else{
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[1][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[0][4] + '</span></div><div class="col-md-4"><h2>3rd</h2><span>'+ rooms[2][4] + '</span></div></div>';
+        }
     }else if(rooms.length==2){
-        winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[0][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + '</span></div></div>';
+        if(rooms[0][5]==rooms[1][5]){
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + ', ' + rooms[0][4] + '</span></div></div>';
+        }else{
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[1][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[0][4] + '</span></div></div>';
+        }
     }else if(rooms.length==1){
         winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>1st</h2><span>'+ rooms[0][4] + '</span></div></div>';
     }
@@ -841,6 +851,7 @@ socket.on('winner-disp', rooms => {
 })
 
 socket.on('all-users-clicked', () => {
-    stopCounter = true;
-    // console.log('ok its true now', stopCounter)
+    if(playerId==1){
+        nextMap.style.display = 'block';
+    }
 })
