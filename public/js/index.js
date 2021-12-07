@@ -518,6 +518,7 @@ confirPin.addEventListener('click', () => {
 nextMap.addEventListener('click', () => {
     // nxt++;
     // console.log('nextMap is called', nxt);
+    nextMap.style.display = 'none';
     initMap();
     nextCnt++;
     if(nextCnt==6){
