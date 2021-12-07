@@ -3,6 +3,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Ubuntu:wght@300&display=swap');
 
 
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
 
 .logo-container{
     display: flex;
@@ -324,12 +329,19 @@ main {
 
 .gameOuterLayer{
   z-index: 9999;
+  position: absolute;
+  display: flex;
+}
+
+.subOuterLayer{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  width: 500px;
 }
 
 .score-card{
-  position: absolute;
   background:#000;
-  margin-left: 1380px;
   padding: 15px;
 }
 
@@ -347,10 +359,9 @@ tbody, td, tfoot, th, thead, tr  {
 }
 
 .nextBtnContainer{
-  position: absolute;
-  z-index: 9999;
-  margin-left: 1430px;
-  margin-top: 651px;
+  display: flex;  
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 #errorMessage{
@@ -358,10 +369,7 @@ tbody, td, tfoot, th, thead, tr  {
 }
 
 .randt{
-  position: absolute;
   background:#000;
-  z-index: 9999;
-  margin-left: 700px;
   padding: 15px;
 }
 

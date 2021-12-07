@@ -105,6 +105,8 @@ const afLocs = [];
 
 // chooseCreate.classList.remove('active-btn');
 // chooseHome.classList.add('active-btn');
+// nextMap.style.display = 'block';
+
 
 chooseHome.addEventListener('click', () => {
     createScreen.style.display = 'none';

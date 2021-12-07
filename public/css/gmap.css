@@ -8,8 +8,6 @@ button .gm-control-active{
 
 .map-container{
     background: white;
-    position: absolute;
-    z-index: 9999999;
     padding: 5px 5px 10px 5px;
     border-radius: 5px;
 }
