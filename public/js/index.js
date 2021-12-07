@@ -60,6 +60,7 @@ const chooseJoinRoom = document.getElementById('chooseJoinRoom');
 
 
 let isModeChosen = false;
+let stopCount = false;
 let mode = '';
 let host = '';
 let player = '';
@@ -68,7 +69,7 @@ let roomId = '';
 let locIndex;
 let destination;
 let nextCnt = 0;
-let round = 1;
+let round = 0;
 const chosenLocs = {};
 
 
@@ -397,44 +398,21 @@ chooseStart.addEventListener('click', () => {
 })
 
 socket.on('game-display', rooms => {
-    if(mode=="world"){
-        genRandWorld();
-    }else if(mode=="famous"){
-        genRandFamous();
-    }
-    else if(mode=="northamerica"){
-        genRandNA();
-    }
-    else if(mode=="southamerica"){
-        genRandSA();
-    }
-    else if(mode=="middleeast"){
-        genRandMid();
-    }
-    else if(mode=="europe"){
-        genRandEur();
-    }
-    else if(mode=="asia"){
-        genRandAsia();
-    }
-    else if(mode=="australia"){
-        genRandAus();
-    }
-    else if(mode=="africa"){
-        genRandAfr();
-    }
-    roundDis.innerHTML = "<span class='round' style='color: white;'>Round:" + round + "/10</span>";
     playersScore.innerHTML = '<tr><th>Players</th><th>Score</th></tr>';
-    initMap();
-    startScreen.style.display = 'none';
-    waitingScreen.style.display = 'none';
-    gameScreen.style.display = 'block';
     for(let i=0; i<rooms.length; i++){
         playersScore.innerHTML+='<tr><td style="color: white;">' + rooms[i][4] + '</td><td style="color: white;">0</td></tr>';
     }
+    startScreen.style.display = 'none';
+    waitingScreen.style.display = 'none';
+    gameScreen.style.display = 'block';
+    nextMap.click();
+    initMap();
 })
 
+// let gen = 0;
 function genRandWorld(){
+    // gen++;
+    // console.log('genRandWorld() is called', gen);
     locIndex = Math.floor(Math.random(worldLocs.length)*worldLocs.length);
     if(!chosenLocs[locIndex]){
         chosenLocs[locIndex] = 1;
@@ -461,16 +439,6 @@ function genRandFamous(){
     if(!chosenLocs[locIndex]){
         chosenLocs[locIndex] = 1;
         socket.emit('display-street', ({roomId, locIndex}));
-        
-        
-        // const revGeo = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=VhCAzoCdq1iw3EUcNRezRhbXmIdsfxq9&location='+destLat+','+destLong+'&includeRoadMetadata=true&includeNearestIntersection=true';
-        // fetch(revGeo)
-        // .then(function(response){
-        //     return response.json();
-        // })
-        // .then(function(data){
-        //         destination = data.results[0].locations[0].street + ' ' + data.results[0].locations[0].adminArea1 + ' ' + data.results[0].locations[0].adminArea3 + ' ' + data.results[0].locations[0].adminArea5;
-        // });
     }else{
         genRandFamous();
     }
@@ -480,18 +448,6 @@ function genRandMid(){
     if(!chosenLocs[locIndex]){
         chosenLocs[locIndex] = 1;
         socket.emit('display-street', ({roomId, locIndex}));
-        
-        
-        
-        
-        // const revGeo = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=VhCAzoCdq1iw3EUcNRezRhbXmIdsfxq9&location='+destLat+','+destLong+'&includeRoadMetadata=true&includeNearestIntersection=true';
-        // fetch(revGeo)
-        // .then(function(response){
-        //     return response.json();
-        // })
-        // .then(function(data){
-        //         destination = data.results[0].locations[0].street + ' ' + data.results[0].locations[0].adminArea1 + ' ' + data.results[0].locations[0].adminArea3 + ' ' + data.results[0].locations[0].adminArea5;
-        // });
     }else{
         genRandMid();
     }
@@ -501,18 +457,6 @@ function genRandAsia(){
     if(!chosenLocs[locIndex]){
         chosenLocs[locIndex] = 1;
         socket.emit('display-street', ({roomId, locIndex}));
-        
-        
-        
-        
-        // const revGeo = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=VhCAzoCdq1iw3EUcNRezRhbXmIdsfxq9&location='+destLat+','+destLong+'&includeRoadMetadata=true&includeNearestIntersection=true';
-        // fetch(revGeo)
-        // .then(function(response){
-        //     return response.json();
-        // })
-        // .then(function(data){
-        //         destination = data.results[0].locations[0].street + ' ' + data.results[0].locations[0].adminArea1 + ' ' + data.results[0].locations[0].adminArea3 + ' ' + data.results[0].locations[0].adminArea5;
-        // });
     }else{
         genRandAsia();
     }
@@ -522,17 +466,6 @@ function genRandNA(){
     if(!chosenLocs[locIndex]){
         chosenLocs[locIndex] = 1;
         socket.emit('display-street', ({roomId, locIndex}));
-        
-        
-        
-        // const revGeo = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=VhCAzoCdq1iw3EUcNRezRhbXmIdsfxq9&location='+destLat+','+destLong+'&includeRoadMetadata=true&includeNearestIntersection=true';
-        // fetch(revGeo)
-        // .then(function(response){
-        //     return response.json();
-        // })
-        // .then(function(data){
-        //         destination = data.results[0].locations[0].street + ' ' + data.results[0].locations[0].adminArea1 + ' ' + data.results[0].locations[0].adminArea3 + ' ' + data.results[0].locations[0].adminArea5;
-        // });
     }else{
         genRandNA();
     }
@@ -542,16 +475,6 @@ function genRandSA(){
     if(!chosenLocs[locIndex]){
         chosenLocs[locIndex] = 1;
         socket.emit('display-street', ({roomId, locIndex}));
-        
-        
-        // const revGeo = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=VhCAzoCdq1iw3EUcNRezRhbXmIdsfxq9&location='+destLat+','+destLong+'&includeRoadMetadata=true&includeNearestIntersection=true';
-        // fetch(revGeo)
-        // .then(function(response){
-        //     return response.json();
-        // })
-        // .then(function(data){
-        //         destination = data.results[0].locations[0].street + ' ' + data.results[0].locations[0].adminArea1 + ' ' + data.results[0].locations[0].adminArea3 + ' ' + data.results[0].locations[0].adminArea5;
-        // });
     }else{
         genRandSA();
     }
@@ -561,16 +484,6 @@ function genRandAus(){
     if(!chosenLocs[locIndex]){
         chosenLocs[locIndex] = 1;
         socket.emit('display-street', ({roomId, locIndex}));
-        
-        
-        // const revGeo = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=VhCAzoCdq1iw3EUcNRezRhbXmIdsfxq9&location='+destLat+','+destLong+'&includeRoadMetadata=true&includeNearestIntersection=true';
-        // fetch(revGeo)
-        // .then(function(response){
-        //     return response.json();
-        // })
-        // .then(function(data){
-        //         destination = data.results[0].locations[0].street + ' ' + data.results[0].locations[0].adminArea1 + ' ' + data.results[0].locations[0].adminArea3 + ' ' + data.results[0].locations[0].adminArea5;
-        // });
     }else{
         genRandAus();
     }
@@ -580,16 +493,6 @@ function genRandAfr(){
     if(!chosenLocs[locIndex]){
         chosenLocs[locIndex] = 1;
         socket.emit('display-street', ({roomId, locIndex}));
-        
-        
-        // const revGeo = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=VhCAzoCdq1iw3EUcNRezRhbXmIdsfxq9&location='+destLat+','+destLong+'&includeRoadMetadata=true&includeNearestIntersection=true';
-        // fetch(revGeo)
-        // .then(function(response){
-        //     return response.json();
-        // })
-        // .then(function(data){
-        //         destination = data.results[0].locations[0].street + ' ' + data.results[0].locations[0].adminArea1 + ' ' + data.results[0].locations[0].adminArea3 + ' ' + data.results[0].locations[0].adminArea5;
-        // });
     }else{
         genRandAfr();
     }
@@ -599,15 +502,6 @@ function genRandEur(){
     if(!chosenLocs[locIndex]){
         chosenLocs[locIndex] = 1;
         socket.emit('display-street', ({roomId, locIndex}));
-        
-        // const revGeo = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=VhCAzoCdq1iw3EUcNRezRhbXmIdsfxq9&location='+destLat+','+destLong+'&includeRoadMetadata=true&includeNearestIntersection=true';
-        // fetch(revGeo)
-        // .then(function(response){
-        //     return response.json();
-        // })
-        // .then(function(data){
-        //         destination = data.results[0].locations[0].street + ' ' + data.results[0].locations[0].adminArea1 + ' ' + data.results[0].locations[0].adminArea3 + ' ' + data.results[0].locations[0].adminArea5;
-        // });
     }else{
         genRandEur();
     }
@@ -620,51 +514,46 @@ confirPin.addEventListener('click', () => {
     confirPin.disabled = true;
     socket.emit('user-confirmed');
 })
-let nxt = 0;
+// let nxt = 0;
 nextMap.addEventListener('click', () => {
-    nxt++;
+    // nxt++;
     // console.log('nextMap is called', nxt);
-    nextCnt++;
-    round++;
-    // nextMap.style.display = 'none';
-    roundDis.innerHTML = "<span class='round' style='color: white;'>Round:" + round + "/5</span>";
-    if(nextCnt==5){
-        socket.emit('round-over', roomId);        
-    }
-    confirPin.disabled = false;
-    disDisplay.innerHTML = '';
     initMap();
-    if(mode=="world"){
-        genRandWorld();
-    }else if(mode=="famous"){
-        genRandFamous();
-    }
-    else if(mode=="northamerica"){
-        genRandNA();
-    }
-    else if(mode=="southamerica"){
-        genRandSA();
-    }
-    else if(mode=="middleeast"){
-        genRandMid();
-    }
-    else if(mode=="europe"){
-        genRandEur();
-    }
-    else if(mode=="asia"){
-        genRandAsia();
-    }
-    else if(mode=="australia"){
-        genRandAus();
-    }
-    else if(mode=="africa"){
-        genRandAfr();
+    nextCnt++;
+    if(nextCnt==6){
+        socket.emit('round-over', roomId);        
+    }else{
+        initMap();
+        if(mode=="world"){
+            genRandWorld();
+        }else if(mode=="famous"){
+            genRandFamous();
+        }
+        else if(mode=="northamerica"){
+            genRandNA();
+        }
+        else if(mode=="southamerica"){
+            genRandSA();
+        }
+        else if(mode=="middleeast"){
+            genRandMid();
+        }
+        else if(mode=="europe"){
+            genRandEur();
+        }
+        else if(mode=="asia"){
+            genRandAsia();
+        }
+        else if(mode=="australia"){
+            genRandAus();
+        }
+        else if(mode=="africa"){
+            genRandAfr();
+        }
     }
 })
 
 socket.on('display-error', message => {
-    // errorMessage.style.display = 'block';
-    // errorMessage.innerText = message
     alert(message);
 })
 
@@ -697,10 +586,14 @@ socket.on('room-joined', (roomId, pId) => {
     chooseCreate.disable = true;
     chooseJoin.disable = true;
 })
-let st = 0;
+// let st = 0;
 socket.on('street-display', (locIndex, Cmode) => {
-    myVar = null;
-    st++;
+    confirPin.disabled = false;
+    disDisplay.innerHTML = '';
+    stopCount = false;
+    round++;
+    roundDis.innerHTML = "<span class='round' style='color: white;'>Round: " + round + "/5</span>";
+    // st++;
     // console.log('Street display is called', st);
     confirPin.innerText = 'Confirm';
     mode = Cmode;
@@ -771,28 +664,28 @@ socket.on('street-display', (locIndex, Cmode) => {
     document.getElementById('destLong').value = destLong;
     destination = parseFloat(destLat) + ',' + parseFloat(destLong);
     // console.log('Destination:',destination);
-    
 
-    // function countdown() {
-    //     var seconds = 5;
-    //     function time() {
-    //         if( seconds > 0) {
-    //             seconds--;
-    //             myVar = setTimeout(time, 1000);
-    //             timeDis.innerHTML = "<span class='time' style='color: white;'>00" + ":" + (seconds < 10 ? "0" : "") + String(seconds) + "</span>"; 
-    //             // console.log(seconds) 
-    //         }else if(seconds == 0){
-    //             seconds = 5;
-    //             // console.log('STOP')
-    //             clearTimeout(myVar);
-    //             setTimeout(() => {
-    //                 nextMap.click();
-    //             }, 5000);      
-    //         }
-    //     }
-    //     time();
-    // }
-    // countdown(); 
+    async function countdown() {
+        return new Promise((res, rej) => {
+          let seconds = 60;
+          const interval = setInterval(() => {
+            if (seconds === 0) {
+              clearInterval(interval);
+              res()
+              if(playerId == 1){
+                nextMap.click();
+              }
+            }else if(stopCount){
+                clearInterval(interval);
+                res()
+            }
+            timeDis.innerHTML = "<span class='time' style='color: white;'>00" + ":" + (seconds < 10 ? "0" : "") + String(seconds) + "</span>"; 
+            // console.log(seconds) 
+            seconds--;
+          }, 1000);
+        });
+    }
+    countdown()
 })
 
 socket.on('score-upd', rooms => {
@@ -851,6 +744,7 @@ socket.on('winner-disp', rooms => {
 })
 
 socket.on('all-users-clicked', () => {
+    stopCount = true;
     if(playerId==1){
         nextMap.style.display = 'block';
     }
