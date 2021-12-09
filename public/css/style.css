@@ -6,6 +6,7 @@
 *{
   margin: 0px;
   padding: 0px;
+  box-sizing: border-box;
 }
 
 
@@ -140,6 +141,22 @@ main {
   padding-bottom: 50px;
 }
 
+.popup-container{
+  height: 70%;
+  width: 60%;
+  position: fixed;
+  z-index:99999;
+  background-color: #ffff;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  /* margin-top: 70px; */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 10px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
 .card-content{
   display: flex;
   margin: auto;
@@ -156,14 +173,14 @@ main {
 }
 
 .input-container{
-  display: flex; 
-  justify-content: center;
+  /* display: flex;  */
+  /* justify-content: center; */
   padding: 10px;
 }
 
 .create-btn-container{
   display: flex; 
-  justify-content: center;
+  justify-content: space-around;
   transition: 0.2s;
 }
 
@@ -200,6 +217,24 @@ main {
 }
 
 .input-box:focus{
+  transform: scale(1.01);
+  transition: 0.4s;
+}
+
+.input-box2{
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: 'Fredoka One', cursive;
+  color: #696969;
+  transition: 0.4s;
+  outline: none !important;
+  border: none !important;
+  background-color: #f3f3f3 !important;
+  /* border-color: rgb(46, 46, 46) !important; */
+}
+
+.input-box2:focus{
   transform: scale(1.01);
   transition: 0.4s;
 }
@@ -299,7 +334,11 @@ main {
 }
 
 .waiting-list-container{
-  margin-left: 160px !important;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  /* align-content: flex-start; */
+  /* margin-left: 160px !important; */
 }
 
 .waiting-list-container span{
@@ -346,6 +385,14 @@ main {
 .score-card{
   background:#000;
   padding: 15px;
+}
+
+#playersScore{
+  /* position:re  lative; */
+} 
+#playersScore table{
+    /* top: 0;
+    right: 0; */
 }
 
 .score-card table tr th, #playersScore table tr td{

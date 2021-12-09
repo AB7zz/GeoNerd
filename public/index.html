@@ -102,7 +102,7 @@
                             <div class="card-para-container">
                                 <p>Want to play GeoGuessr for free? Then you're at the right place! GlobeGuessr is basically GeoGuessr, but you can play unlimited number of times with multiple friends all for a cost of $0. </p>
                                 <br>
-                                <p>Also, I'd be very happy if you could help me buy a coffee!</p>
+                                <p>Also, I'd be very happy if you could help me buy me a coffee! It will motivate me to make this game even better :)</p>
                                 <a href="https://www.buymeacoffee.com/AB7zz" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
                             </div>
                             
@@ -215,12 +215,35 @@
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="create-btn-container">
-                                <button id='chooseCreateConfirm' class='btn btn-success'>Confirm</button>
+                                <!-- <button id='chooseCreateConfirm' class='btn btn-success'>Confirm</button> -->
                                 <!-- <button style='margin-right: 15px;' id='playAgain' class='btn btn-success'>Play Again</button>
                                 <button id='exitGame' class='btn btn-danger'>Exit Game</button> -->
                             </div>
                             <div class="errorMsg" style='display: flex; justify-content: center; margin-top: 20px;'>
                                 <p style='color: red; font-weight: bold;' id='errorMessage'></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id='popup' style='display: none;' class="popup-container pop-up">
+                        <div class="popup-content">
+                            <h1 class='card-heading'>More settings</h1>
+                            <div class="input-container">
+                                <label style='color: black;' for="">Enter the maximum number of rounds</label>
+                                <input type="text" placeholder='ex: 7' class='input-box2' id='maxRounds' required>
+                            </div>
+                            <div class="input-container">
+                                <label style='color: black;' for="">Enter the maximum number of room members</label>
+                                <input type="text" placeholder='ex: 5' class='input-box2' id='maxPlayers' required>
+                            </div>
+                            <div class="input-container">
+                                <label style='color: black;' for="">Enter the time limit for each round</label>
+                                <input type="text" placeholder='ex: 60' class='input-box2' id='maxTime' required>
+                            </div>
+                            <div class="create-btn-container">
+                                <button id='cancelPopup' class='btn btn-danger'>Cancel</button>
+                                <button id='chooseCreateConfirm' class='btn btn-success'>Confirm</button>
+                                <!-- <button style='margin-right: 15px;' id='playAgain' class='btn btn-success'>Play Again</button>
+                                <button id='exitGame' class='btn btn-danger'>Exit Game</button> -->
                             </div>
                         </div>
                     </div>
@@ -261,13 +284,12 @@
                                 <h1 class='card-heading'>Waiting list</h1>
                             </div>
                         </div>
-                        <div class="row waiting-list-container mt-4 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div id="playersList" class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                
-                            </div>
+                        <div id="playersList" class="waiting-list-container mt-4">
+                            <!-- <span><i style='color: green;' class='fas fa-circle'></i> Abhinav CV</span>
+                            <span><i style='color: green;' class='fas fa-circle'></i> Abhinav CV</span>
+                            <span><i style='color: green;' class='fas fa-circle'></i> Abhinav CV</span>
+                            <span><i style='color: green;' class='fas fa-circle'></i> Abhinav CV</span>
+                            <span><i style='color: green;' class='fas fa-circle'></i> Abhinav CV</span> -->
                         </div>
                         <div class="mt-4 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="create-btn-container">

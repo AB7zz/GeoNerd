@@ -1,14 +1,16 @@
 const rooms = []
-const createRoom = (roomId, mode, playerSocketId, host, score, started) => {
+const createRoom = (roomId, mode, playerSocketId, host, rounds, playerLim, timeLim, score, started) => {
     rooms[roomId] = []
-    //                  roomId|mode|playerId|socketId|hostname|score|started
-    rooms[roomId].push([roomId, mode, rooms[roomId].length+1, playerSocketId, host, score, started])
+    //                    0      1      2        3       4       5        6        7      8      9
+    //                  roomId|mode|playerId|socketId|hostname|rounds|playerLim|timeLim|score|started
+
+    
+    rooms[roomId].push([roomId, mode, rooms[roomId].length+1, playerSocketId, host, rounds, playerLim, timeLim, score, started])
     console.log(rooms[roomId])
 }
 
-const joinRoom = (roomId, mode, playerSocketId, player, score, started) => {
-    //                  roomId|mode|playerId|socketId|hostname|score|started
-    rooms[roomId].push([roomId, mode, rooms[roomId].length+1, playerSocketId, player, score, started])
+const joinRoom = (roomId, mode, playerSocketId, player, rounds, playerLim, timeLim, score, started) => {
+    rooms[roomId].push([roomId, mode, rooms[roomId].length+1, playerSocketId, player, rounds, playerLim, timeLim, score, started])
     console.log(rooms[roomId])
 }
 

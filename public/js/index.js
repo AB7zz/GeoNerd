@@ -53,12 +53,16 @@ const roundDis = document.getElementById('roundDis');
 const timeDis = document.getElementById('timeDis');
 const winnersList = document.getElementById('winnersList');
 const playExitBtn = document.getElementById('playExitBtn');
+const popup = document.getElementById('popup');
+const cancelPopup = document.getElementById('cancelPopup');
 
 // Input
 const chooseCreateName = document.getElementById('chooseCreateName');
 const chooseCreateRoom = document.getElementById('chooseCreateRoom');
 const chooseJoinName = document.getElementById('chooseJoinName');
-const chooseJoinRoom = document.getElementById('chooseJoinRoom');
+const maxRounds = document.getElementById('maxRounds');
+const maxTime = document.getElementById('maxTime');
+const maxPlayers = document.getElementById('maxPlayers');
 
 
 
@@ -67,12 +71,15 @@ let stopCount = false;
 let mode = '';
 let host = '';
 let player = '';
+let playerLim = '';
 let playerId = 0;
 let roomId = '';    
 let locIndex;
 let destination;
 let nextCnt = 0;
 let round = 0;
+let rounds = '';
+let timeLim = '';
 const chosenLocs = {};
 
 
@@ -252,6 +259,10 @@ chooseJoinConfirm.addEventListener('click', () => {
     socket.emit('join-room', {player, roomId});
 })
 
+cancelPopup.addEventListener('click', () => {
+    popup.style.display = 'none';
+})
+
 chooseMode1.addEventListener('click', () => {
     modeCard1.classList.add('mode-card-active');
     chooseMode1.innerHTML = '<i class="fas fa-check-circle"></i> Chosen';
@@ -259,6 +270,8 @@ chooseMode1.addEventListener('click', () => {
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
     mode='world';
+    popup.style.display = 'flex';
+
 
 
     modeCard2.classList.remove('mode-card-active');
@@ -285,6 +298,7 @@ chooseMode2.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    popup.style.display = 'flex';
     mode='famous';
 
     modeCard1.classList.remove('mode-card-active');
@@ -311,6 +325,7 @@ chooseMode3.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    popup.style.display = 'flex';
     mode='northamerica';
 
     modeCard1.classList.remove('mode-card-active');
@@ -337,6 +352,7 @@ chooseMode4.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    popup.style.display = 'flex';
     mode='southamerica';
 
     modeCard1.classList.remove('mode-card-active');
@@ -363,6 +379,7 @@ chooseMode5.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    popup.style.display = 'flex';
     mode='middleeast';
 
     modeCard1.classList.remove('mode-card-active');
@@ -389,6 +406,7 @@ chooseMode6.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    popup.style.display = 'flex';
     mode='europe';
 
     modeCard1.classList.remove('mode-card-active');
@@ -415,6 +433,7 @@ chooseMode7.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    popup.style.display = 'flex';
     mode='asia';
 
     modeCard1.classList.remove('mode-card-active');
@@ -441,6 +460,7 @@ chooseMode8.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    popup.style.display = 'flex';
     mode='australia';
 
     modeCard1.classList.remove('mode-card-active');
@@ -467,6 +487,7 @@ chooseMode9.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    popup.style.display = 'flex';
     mode='africa';
 
     modeCard1.classList.remove('mode-card-active');
@@ -491,7 +512,10 @@ chooseMode9.addEventListener('click', () => {
 chooseCreateConfirm.addEventListener('click', () => {
     host = chooseCreateName.value;
     roomId = chooseCreateRoom.value;
-    socket.emit('create-room', {host, mode, roomId});
+    rounds = maxRounds.value;
+    timeLim = maxTime.value;
+    playerLim = maxPlayers.value;
+    socket.emit('create-room', {host, mode, roomId, rounds, timeLim, playerLim});
 })
 
 chooseStart.addEventListener('click', () => {
@@ -631,7 +655,7 @@ nextMap.addEventListener('click', () => {
     nextMap.style.display = 'none';
     
     nextCnt++;
-    if(nextCnt==8){
+    if(nextCnt==parseFloat(rounds)+1){
         socket.emit('round-over', roomId);        
     }else{
         
@@ -682,6 +706,7 @@ socket.on('host-connected', (host, roomId) => {
 })
 
 socket.on('player-connected', (rooms, roomId) => {
+    timeLim = rooms[0][7];
     playersList.innerHTML = '';
     for(let i=0; i<rooms.length; i++){
         playersList.innerHTML += "<span><i style='color: green;' class='fas fa-circle'></i> " + rooms[i][4] + "</span><br>";
@@ -703,7 +728,7 @@ socket.on('street-display', (locIndex, Cmode) => {
     disDisplay.innerHTML = '';
     stopCount = false;
     round++;
-    roundDis.innerHTML = "<span class='round' style='color: white;'>Round: " + round + "/7</span>";
+    roundDis.innerHTML = "<span class='round' style='color: white;'>Round: " + round + "/" + rounds + " </span>";
     // st++;
     // console.log('Street display is called', st);
     confirPin.innerText = 'Confirm';
@@ -778,7 +803,7 @@ socket.on('street-display', (locIndex, Cmode) => {
 
     async function countdown() {
         return new Promise((res, rej) => {
-          let seconds = 60;
+          let seconds = parseFloat(timeLim);
           const interval = setInterval(() => {
             if (seconds === 0) {
               clearInterval(interval);
@@ -802,14 +827,14 @@ socket.on('street-display', (locIndex, Cmode) => {
 socket.on('score-upd', rooms => {
     playersScore.innerHTML = '<tr><th>Players</th><th>Score</th></tr>';
     for(let i=0; i<rooms.length; i++){
-        playersScore.innerHTML+='<tr><td style="color: white;">' + rooms[i][4] + '</td><td style="color: white;">' + rooms[i][5] + '</td></tr>'
+        playersScore.innerHTML+='<tr><td style="color: white;">' + rooms[i][4] + '</td><td style="color: white;">' + rooms[i][8] + '</td></tr>'
     }
 })
 
 socket.on('player-left', rooms => {
     playersScore.innerHTML = '<tr><th>Players</th><th>Score</th></tr>';
     for(let i=0; i<rooms.length; i++){
-        playersScore.innerHTML+='<tr><td style="color: white;">' + rooms[i][4] + '</td><td style="color: white;">' + rooms[i][5] + '</td></tr>'
+        playersScore.innerHTML+='<tr><td style="color: white;">' + rooms[i][4] + '</td><td style="color: white;">' + rooms[i][8] + '</td></tr>'
     }
     playersList.innerHTML = '';
     for(let i=0; i<rooms.length; i++){
@@ -821,13 +846,14 @@ socket.on('winner-disp', rooms => {
     if(playerId!=1){
         playAgain.style.display = 'none';
     }
+    waitingScreen.style.display = 'none';
     nextMap.style.display = 'none';
     gameScreen.style.display = 'none';
     startScreen.style.display = 'flex';
     winnersScreen.style.display = 'block';
     for(let i=0; i<rooms.length; i++){
         for(let j=i+1; j<rooms.length; j++){
-            if(rooms[j][5]>rooms[i][5]){
+            if(rooms[j][8]>rooms[i][8]){
                 let temp = rooms[j];
                 rooms[j] = rooms[i];    
                 rooms[i] = temp;
@@ -836,17 +862,17 @@ socket.on('winner-disp', rooms => {
     }
     // console.log(rooms);
     if(rooms.length>=3){
-        if(rooms[1][5]==rooms[0][5] && rooms[1][5]!=rooms[2][5]){
+        if(rooms[1][8]==rooms[0][8] && rooms[1][8]!=rooms[2][8]){
             winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + ', ' + rooms[0][4] + '</span></div><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[2][4] + '</span></div></div>';
-        }else if(rooms[1][5]==rooms[2][5] && rooms[1][5]!=rooms[0][5]){
+        }else if(rooms[1][8]==rooms[2][8] && rooms[1][8]!=rooms[0][8]){
             winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[1][4] + ', ' + rooms[2][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[0][4] + '</span></div></div>';
-        }else if(rooms[1][5]==rooms[2][5] && rooms[1][5]==rooms[0][5]){
+        }else if(rooms[1][8]==rooms[2][8] && rooms[1][8]==rooms[0][8]){
             winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + ', ' + rooms[2][4] + ', ' + rooms[0][4] + '</span></div></div>';
         }else{
             winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[1][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[0][4] + '</span></div><div class="col-md-4"><h2>3rd</h2><span>'+ rooms[2][4] + '</span></div></div>';
         }
     }else if(rooms.length==2){
-        if(rooms[0][5]==rooms[1][5]){
+        if(rooms[0][8]==rooms[1][8]){
             winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + ', ' + rooms[0][4] + '</span></div></div>';
         }else{
             winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[1][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[0][4] + '</span></div></div>';
@@ -859,9 +885,9 @@ socket.on('winner-disp', rooms => {
 
 socket.on('all-users-clicked', () => {
     stopCount = true;
-    if(playerId==1 && nextCnt!=7){
+    if(playerId==1 && nextCnt!=rounds){
         nextMap.style.display = 'block';
-    }else if(playerId==1 && nextCnt==7){
+    }else if(playerId==1 && nextCnt==rounds){
         nextMap.style.display = 'block';
         nextMap.innerText = 'Finish';
     }
