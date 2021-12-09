@@ -22,3 +22,7 @@ button .gm-control-active{
     display: flex;
     justify-content: center;
 }
+
+.gm-fullscreen-control {
+    display: none !important;
+  }

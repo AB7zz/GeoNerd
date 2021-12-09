@@ -308,7 +308,7 @@ main {
 }
 
 .card-para-container{
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   padding: 70px;
 }
