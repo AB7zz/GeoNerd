@@ -14,6 +14,7 @@ let score = 0
 let rId = ''
 let pId = ''
 let confirmCnt = 0;
+let started = 0;
 io.on('connection', socket => {
     socket.on('create-room', ({host, mode, roomId}) => {
         Cmode = mode
@@ -36,10 +37,12 @@ io.on('connection', socket => {
         }else{
             socket.join(roomId)
             userConnected(socket.client.id)
-            createRoom(roomId, mode, socket.client.id, host, score)
+            started = 0;
+            createRoom(roomId, mode, socket.client.id, host, score, started)
             socket.emit('host-connected', host, roomId)
             socket.emit('room-created', roomId)
             console.log('Host Connected')
+            console.log(rooms[roomId]);
         }
     })
 
@@ -54,33 +57,36 @@ io.on('connection', socket => {
         }else if(!rooms[roomId]){
             const message = "No such room exists"   
             socket.emit('display-error', message)
-            console.log(message)
+        }else if(rooms[roomId][0][6] == 1){
+            const message = "They have already started the game"   
+            socket.emit('display-error', message)
         }else if(socket.client.id == rooms[roomId][0][3]){
             const message = "You cannot join a room you created"   
             socket.emit('display-error', message)
-            console.log(message)
         }else{
             socket.join(roomId)
             userConnected(socket.client.id)
-            joinRoom(roomId, Cmode, socket.client.id, player, score)
+            joinRoom(roomId, Cmode, socket.client.id, player, score, started)
             io.to(roomId).emit('player-connected', rooms[roomId], roomId)
             let index = rooms[roomId].length-1
             pId = rooms[roomId][index][2]
             socket.emit('room-joined', roomId, rooms[roomId][index][2])
             console.log('Player Joined')
+            console.log(rooms[roomId]);
         }
     })
 
     socket.on('start-game', roomId => {
         io.to(roomId).emit('game-display', rooms[roomId])
-
-        
     })
     let call = 0;
     socket.on('display-street', ({roomId, locIndex}) => {
         call++;
+        started = 1;
+        for(let i=0;i<rooms[roomId].length; i++){
+            rooms[roomId][i][6] = 1;
+        }
         io.to(roomId).emit('street-display', locIndex, Cmode)
-        // console.log('Street display is called',call)
     })
 
     socket.on('score-inc', ({playerId, roomId, distance}) => {
@@ -119,7 +125,17 @@ io.on('connection', socket => {
 
     socket.on('round-over', () => {
         io.to(rId).emit('winner-disp', rooms[rId])
-        exitRoom(rId)
+        // exitRoom(rId)
+    })
+
+    socket.on('play-again', roomId => {
+        console.log(rooms[roomId])
+        for(let i=0;i<rooms[roomId].length; i++){
+            rooms[roomId][i][6] = 0;
+            rooms[roomId][i][5] = 0;
+        }
+        console.log(rooms[roomId])
+        io.to(roomId).emit('play-again-screen', rooms[roomId])
     })
 
     socket.on('disconnect', () => {

@@ -1,5 +1,8 @@
 const confirmPin = document.getElementById('confirmPin');
+// let lol = 0;
 function initMap(){
+    // lol++;
+    // console.log('initMap() is called', lol, 'times');
     confirmPin.disabled = true;
     let myLatLng;
     let zoomVal;
