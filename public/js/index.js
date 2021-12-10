@@ -260,7 +260,12 @@ chooseJoinConfirm.addEventListener('click', () => {
 })
 
 cancelPopup.addEventListener('click', () => {
-    popup.style.display = 'none';
+    // popup.classList.add('animate__animated')
+    popup.classList.remove('animate__zoomIn');
+    popup.classList.add('animate__zoomOut')
+    setTimeout(() => {
+        popup.style.display = 'none';
+    }, 500)
 })
 
 chooseMode1.addEventListener('click', () => {
@@ -270,6 +275,10 @@ chooseMode1.addEventListener('click', () => {
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
     mode='world';
+    if(popup.classList.contains('animate__zoomOut')){
+        popup.classList.remove('animate__zoomOut')
+    }
+    popup.classList.add('animate__zoomIn')
     popup.style.display = 'flex';
 
 
@@ -298,7 +307,12 @@ chooseMode2.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    if(popup.classList.contains('animate__zoomOut')){
+        popup.classList.remove('animate__zoomOut')
+    }
+    popup.classList.add('animate__zoomIn')
     popup.style.display = 'flex';
+    
     mode='famous';
 
     modeCard1.classList.remove('mode-card-active');
@@ -325,7 +339,12 @@ chooseMode3.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    if(popup.classList.contains('animate__zoomOut')){
+        popup.classList.remove('animate__zoomOut')
+    }
+    popup.classList.add('animate__zoomIn')
     popup.style.display = 'flex';
+    
     mode='northamerica';
 
     modeCard1.classList.remove('mode-card-active');
@@ -352,7 +371,12 @@ chooseMode4.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    if(popup.classList.contains('animate__zoomOut')){
+        popup.classList.remove('animate__zoomOut')
+    }
+    popup.classList.add('animate__zoomIn')
     popup.style.display = 'flex';
+    
     mode='southamerica';
 
     modeCard1.classList.remove('mode-card-active');
@@ -379,7 +403,12 @@ chooseMode5.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    if(popup.classList.contains('animate__zoomOut')){
+        popup.classList.remove('animate__zoomOut')
+    }
+    popup.classList.add('animate__zoomIn')
     popup.style.display = 'flex';
+    
     mode='middleeast';
 
     modeCard1.classList.remove('mode-card-active');
@@ -406,7 +435,12 @@ chooseMode6.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    if(popup.classList.contains('animate__zoomOut')){
+        popup.classList.remove('animate__zoomOut')
+    }
+    popup.classList.add('animate__zoomIn')
     popup.style.display = 'flex';
+    
     mode='europe';
 
     modeCard1.classList.remove('mode-card-active');
@@ -433,7 +467,12 @@ chooseMode7.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    if(popup.classList.contains('animate__zoomOut')){
+        popup.classList.remove('animate__zoomOut')
+    }
+    popup.classList.add('animate__zoomIn')
     popup.style.display = 'flex';
+    
     mode='asia';
 
     modeCard1.classList.remove('mode-card-active');
@@ -460,7 +499,12 @@ chooseMode8.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    if(popup.classList.contains('animate__zoomOut')){
+        popup.classList.remove('animate__zoomOut')
+    }
+    popup.classList.add('animate__zoomIn')
     popup.style.display = 'flex';
+    
     mode='australia';
 
     modeCard1.classList.remove('mode-card-active');
@@ -487,7 +531,12 @@ chooseMode9.addEventListener('click', () => {
     modeImg.style.borderTopRightRadius = '0px';
     modeImg.style.borderTopLeftRadius = '0px';
     isModeChosen = true;
+    if(popup.classList.contains('animate__zoomOut')){
+        popup.classList.remove('animate__zoomOut')
+    }
+    popup.classList.add('animate__zoomIn')
     popup.style.display = 'flex';
+    
     mode='africa';
 
     modeCard1.classList.remove('mode-card-active');

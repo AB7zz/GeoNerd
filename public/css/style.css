@@ -437,3 +437,11 @@ tbody, td, tfoot, th, thead, tr  {
   background: white !important;
   border-radius: 10px;
 }
+
+.animate__animated.animate__zoomIn {
+  --animate-duration: 0.5s;
+}
+
+.animate__animated.animate__zoomOut {
+  --animate-duration: 0.5s;
+}
