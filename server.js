@@ -37,6 +37,15 @@ io.on('connection', socket => {
         }else if(playerLim==""){
             const message = "Please enter the max number of room members"
             socket.emit('display-error', message)
+        }else if(rounds>50){
+            const message = "Maximum rounds cannot exceed 50"
+            socket.emit('display-error', message)
+        }else if(playerLim>100){
+            const message = "Maximum number of room members cannot exceed 100"
+            socket.emit('display-error', message)
+        }else if(timeLim>600){
+            const message = "Time limit cannot exceed 600 seconds"
+            socket.emit('display-error', message)
         }else if(rooms[roomId] && (socket.client.id == rooms[roomId][0][3])){
             socket.emit('host-connected', host, roomId)
             socket.emit('room-created', roomId)
@@ -82,7 +91,7 @@ io.on('connection', socket => {
             io.to(roomId).emit('player-connected', rooms[roomId], roomId)
             let index = rooms[roomId].length-1
             pId = rooms[roomId][index][2]
-            socket.emit('room-joined', roomId, rooms[roomId][index][2])
+            socket.emit('room-joined', roomId, rooms[roomId], rooms[roomId][index][2])
             console.log('Player Joined')
             console.log(rooms[roomId]);
         }
@@ -151,7 +160,7 @@ io.on('connection', socket => {
     })
 
     socket.on('disconnect', () => {
-        if(rooms[rId]){
+        if(rooms[rId] && rooms[rId].length>1){
             if(rooms[rId][0][3]==socket.client.id){
                 io.to(rId).emit('winner-disp', rooms[rId])
                 exitRoom(rId)

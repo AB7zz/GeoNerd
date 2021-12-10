@@ -157,6 +157,7 @@ main {
   padding-bottom: 50px;
 }
 
+
 .card-content{
   display: flex;
   margin: auto;
@@ -444,4 +445,11 @@ tbody, td, tfoot, th, thead, tr  {
 
 .animate__animated.animate__zoomOut {
   --animate-duration: 0.5s;
+}
+
+.black-cover{
+  background: black;
+  height: 100%;
+  width: 100%;
+  position: absolute;
 }

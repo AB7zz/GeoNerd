@@ -268,6 +268,9 @@ cancelPopup.addEventListener('click', () => {
     }, 500)
 })
 
+
+
+
 chooseMode1.addEventListener('click', () => {
     modeCard1.classList.add('mode-card-active');
     chooseMode1.innerHTML = '<i class="fas fa-check-circle"></i> Chosen';
@@ -280,6 +283,7 @@ chooseMode1.addEventListener('click', () => {
     }
     popup.classList.add('animate__zoomIn')
     popup.style.display = 'flex';
+    
 
 
 
@@ -762,8 +766,9 @@ socket.on('player-connected', (rooms, roomId) => {
     }
 })
 
-socket.on('room-joined', (roomId, pId) => {
+socket.on('room-joined', (roomId, rooms, pId) => {
     playerId = pId;
+    rounds = rooms[0][5];
     createScreen.style.display = 'none';
     joinScreen.style.display = 'none';
     chooseStart.style.display = 'none';
