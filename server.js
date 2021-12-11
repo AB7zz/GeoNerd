@@ -160,7 +160,7 @@ io.on('connection', socket => {
     })
 
     socket.on('disconnect', () => {
-        if(rooms[rId] && rooms[rId].length>1){
+        if(rooms[rId]){
             if(rooms[rId][0][3]==socket.client.id){
                 io.to(rId).emit('winner-disp', rooms[rId])
                 exitRoom(rId)
