@@ -20,16 +20,7 @@
     width: auto;
 }
 
-@media screen and (max-width: 1256px) {
-  .logo-img{
-    height: 150px;
-  }
-}
-@media screen and (max-width: 954px) {
-  .logo-img{
-    height: 100px;
-  }
-}
+
 
 
 * {
@@ -81,17 +72,6 @@ main {
   color: white;
 }
 
-@media screen and (max-width: 1080px){
-  .side-bar .nav-links .nav-tab a{
-    font-size: 13px;
-  }
-}
-
-@media screen and (max-width: 960px){
-  #hide-btn{
-    display: none;
-  }
-}
 
 .side-bar .nav-links li:hover {
   background-color: #864879;
@@ -185,6 +165,7 @@ main {
 
 .card-content{
   display: flex;
+  max-width: 100%;
   margin: auto;
 }
 
@@ -272,11 +253,7 @@ main {
 
 
 
-@media (max-width: 992px) {
-  .main-content {
-    padding: 1rem !important;
-  }
-}
+
 
 .card{
   border-radius: 10px !important;
@@ -304,58 +281,7 @@ main {
 
 
 
-@media screen and (max-width: 770px) {
-  /* .mode-img {
-    height: 50px;
-    width: 50px;
-  } */
-  /* .card{
-    height: 150px;
-    width: 250px;
-  } */
-  .main-content {
-      margin-left: 0;
-  }
-  .side-bar{
-    /* display: none; */
-    flex-direction: row;
-  }
-  .side-bar .nav-links .nav-tab a{
-    font-size: 20px;
-  }
-  .nav-links{
-    flex-direction: row;
-    justify-content: space-evenly;
-    width: 100%;
-  }
-  .mobile-bar{
-    /* display: block; */
-  }
-  .nav-container{
-    background: black;
-    padding-top: 15px;
-    padding-bottom: 15px;
-  }
-  .logo-img{
-    height: 70px;
-    width: auto;
-  }
-  .ham-container{
-    padding: 20px;
-    margin-left: 10px;
-  }
-  .hamburger{
-    font-size: 35px;
-  }
-  .nav-content{
-    background: black;
-    position: absolute;
-    z-index: 99999999;
-  }
-  .nav-content ul li{
-    color: white;
-  }
-}
+
 
 .mode-heading{
   color: black;
@@ -375,21 +301,7 @@ main {
   padding-bottom: 5px !important;
 }
 
-@media screen and (max-width: 1187px){
-  .mode-btn{
-    font-size: 13px !important;
-  }
-}
-@media screen and (max-width: 1119px){
-  .mode-btn{
-    font-size: 10px !important;
-  }
-}
-@media screen and (max-width: 1059px){
-  .mode-btn{
-    font-size: 8px !important;
-  }
-}
+
 
 .mode-card-active{
   border-color: rgb(86, 209, 86) !important;
@@ -526,3 +438,111 @@ main .rowss{
   margin-right: 0 !important;
 }
 
+
+
+@media screen and (max-width: 1080px){
+  .side-bar .nav-links .nav-tab a{
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 960px){
+  #hide-btn{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1256px) {
+  .logo-img{
+    height: 150px;
+  }
+}
+@media screen and (max-width: 954px) {
+  .logo-img{
+    height: 100px;
+  }
+}
+
+@media (max-width: 992px) {
+  .main-content {
+    padding: 1rem !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* .mode-img {
+    height: 50px;
+    width: 50px;
+  } */
+  /* .card{
+    height: 150px;
+    width: 250px;
+  } */
+  .main-content {
+      margin-left: 0;
+  }
+  .side-bar{
+    /* display: none; */
+    flex-direction: row;
+  }
+  .side-bar .nav-links .nav-tab a{
+    font-size: 20px;
+  }
+  .nav-links{
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+  .mobile-bar{
+    /* display: block; */
+  }
+  .nav-container{
+    background: black;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .logo-img{
+    height: 70px;
+    width: auto;
+  }
+  .ham-container{
+    padding: 20px;
+    margin-left: 10px;
+  }
+  .hamburger{
+    font-size: 35px;
+  }
+  .nav-content{
+    background: black;
+    position: absolute;
+    z-index: 99999999;
+  }
+  .nav-content ul li{
+    color: white;
+  }
+}
+
+/* @media screen and (max-width: 1187px){
+  .mode-btn{
+    font-size: 13px !important;
+  }
+} */
+/* @media screen and (max-width: 1119px){
+  .mode-btn{
+    font-size: 10px !important;
+  }
+} */
+@media screen and (max-width: 1059px){
+  .mode-btn{
+    font-size: 15px !important;
+  }
+}
+
+@media screen and (max-width: 426px){
+  .mode-btn{
+    font-size: 10px !important;
+  }
+  .input-box{
+    font-size: small;
+  }
+}
