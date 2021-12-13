@@ -152,14 +152,15 @@ main {
   position: fixed;
   z-index:99999;
   background-color: #ffff;
-  display: flex;
   justify-content: center;
   margin: auto;
-  /* margin-top: 70px; */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   border-radius: 10px;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  /* padding-top: 50px;
+  padding-bottom: 50px; */
+  padding-right: 80px;
+  padding-left: 80px;
+  padding-top: 27px;
 }
 
 
@@ -519,6 +520,14 @@ main .rowss{
   }
   .nav-content ul li{
     color: white;
+  }
+  .popup-container{
+    margin: -168px;
+    height: 80%;
+    width: 70%;
+    padding-top: 35px;
+    padding-right: 80px;
+    padding-left: 80px;
   }
 }
 
