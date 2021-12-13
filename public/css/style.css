@@ -302,11 +302,7 @@ main {
   padding-right: 0 !important
 }
 
-.nav-container{
-  height: 70px;
-  background: black;
-  
-}
+
 
 @media screen and (max-width: 770px) {
   /* .mode-img {
@@ -325,6 +321,11 @@ main {
   }
   .mobile-bar{
     display: block;
+  }
+  .nav-container{
+    height: 70px;
+    background: black;
+    padding: 15px;
   }
   .logo-img{
     height: 70px;
