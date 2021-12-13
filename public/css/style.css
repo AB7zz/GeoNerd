@@ -20,6 +20,17 @@
     width: auto;
 }
 
+@media screen and (max-width: 1256px) {
+  .logo-img{
+    height: 150px;
+  }
+}
+@media screen and (max-width: 954px) {
+  .logo-img{
+    height: 100px;
+  }
+}
+
 
 * {
   box-sizing: border-box;
@@ -29,7 +40,7 @@
 }
 
 main {
-  display: flex;
+  /* display: flex; */
   flex-direction: row;
   /* background-color: #fff; */
 }
@@ -37,7 +48,7 @@ main {
 .side-bar {
   display: flex;
   flex-direction: column;
-  position: fixed;
+  /* position: fixed; */
   width: 17rem;
   min-height: 100%;
   background-color: #000;
@@ -55,6 +66,8 @@ main {
 }
 
 .side-bar ul li {
+  display: flex;
+  justify-content: center;
   margin: 0.5rem 0;
   padding: 0.5em;
   width: 100%;
@@ -66,6 +79,18 @@ main {
 .side-bar ul li a {
   text-decoration: none;
   color: white;
+}
+
+@media screen and (max-width: 1080px){
+  .side-bar ul li a{
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 960px){
+  #hide-btn{
+    display: none;
+  }
 }
 
 .side-bar ul li:hover {
@@ -93,9 +118,9 @@ main {
 
 .main-content {
   min-height: 100vh;
-  margin-left: 17rem;
+  /* margin-left: 17rem; */
   padding: 2rem;
-  width: 100%;
+  /* width: 100%; */
   background: url('../images/bg.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -245,25 +270,7 @@ main {
   border-color: rgb(55, 224, 55) !important;
 }
 
-@media (max-width: 768px) {
-    .logo-img{
-        height: 100px;
-        width: auto;
-    }
-    .main-content {
-        margin-left: 7.5rem;
-    }
-    .side-bar {
-        width: 7.5rem;
-    }
-    .side-bar ul li {
-        text-align: center;
-        font-size: 1.2rem;
-    }
-    .side-bar ul span {
-        display: none;
-    }
-}
+
 
 @media (max-width: 992px) {
   .main-content {
@@ -288,6 +295,48 @@ main {
 .mode-img{
   height: auto;
   width: auto;
+}
+
+.mobile-bar{
+  display: none;
+  padding-right: 0 !important
+}
+
+.nav-container{
+  height: 70px;
+  background: black;
+  
+}
+
+@media screen and (max-width: 770px) {
+  /* .mode-img {
+    height: 50px;
+    width: 50px;
+  } */
+  /* .card{
+    height: 150px;
+    width: 250px;
+  } */
+  .main-content {
+      margin-left: 0;
+  }
+  .side-bar{
+    display: none;
+  }
+  .mobile-bar{
+    display: block;
+  }
+  .logo-img{
+    height: 70px;
+    width: auto;
+  }
+  .ham-container{
+    padding: 15px;
+    margin-left: 10px;
+  }
+  .hamburger{
+    font-size: 35px;
+  }
 }
 
 .mode-heading{
@@ -453,3 +502,5 @@ tbody, td, tfoot, th, thead, tr  {
   width: 100%;
   position: absolute;
 }
+
+

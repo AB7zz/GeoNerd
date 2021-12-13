@@ -81,6 +81,7 @@ let round = 0;
 let rounds = '';
 let timeLim = '';
 const chosenLocs = {};
+const hideBtn = document.getElementById('hide-btn')
 
 
 

@@ -29,27 +29,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- fontawesome -->
 
-    <!-- street view -->
-    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBsD2-QsOD-joNRmESDtgHFgYt_rMRP-s&callback=initMap&v=weekly&channel=2&libraries=places" async></script>  -->
-
-    <!-- Map  -->
-    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRNzhUIOFuSsTrHHUIBKudNYYEY7Iyje8&callback=initMap&v=weekly&channel=2&libraries=places" async></script> -->
-
-    <!-- JS Map  -->
-    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmN-pywUQGw-Lpn-uSKm0bo4YCNeGzYLU&callback=initMap&v=weekly&channel=2&libraries=places" async></script> -->
-
-    <!-- Distance Tracker -->
-    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4ZenbtSwdwNBTjF7ON9meZO1lPSS9lSo&callback=initMap&v=weekly&channel=2&libraries=places" async></script> -->
-
-    <!-- Geocoding  -->
-    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2NAW_x8UfgynolKjJM6-eTnYiWdgM_X4&callback=initMap&v=weekly&channel=2&libraries=places" async></script> -->
-
-    <!-- API from outside -->
-    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly&channel=2&libraries=places" async></script> -->
-
-    <!-- API without any key  -->
-    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap&v=weekly&channel=2&libraries=places" async></script> -->
-
     <!-- locationpicker -->
     <script src="https://unpkg.com/location-picker/dist/location-picker.min.js"></script>
     
@@ -59,268 +38,278 @@
 </head>
 <body>
     <main id='startScreen'>
-        <div class="side-bar">
-            <div class="logo-top">
-                <a class='logo-container' href="">
-                    <img class='logo-img' src="images/logo.png" alt="logo">
-                </a>
-            </div>
-            <ul class="nav-links">
-                <li id='chooseCreate' class="nav-tab active-btn">
-                    <a href="#">
-                        <i class="fas fa-plus-square"></i>
-                        <span>
-                        Create room
-                        </span>
-                    </a>
-                </li>
-                <li id='chooseJoin' class="nav-tab">
-                    <a href="#">
-                        <i class="fas fa-sign-in-alt"></i>
-                        <span>
-                        Join room
-                        </span>
-                    </a>
-                </li>
-                <li id='chooseHome' class="nav-tab">
-                    <a href="#">
-                        <i class="fas fa-info-circle"></i>
-                        <span>
-                        About
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="main-content w-100 p-5">
-            <div id='homeScreen' class="home">
-                <div class="card-container">
-                    <div class="card-content row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="card-heading-container">
-                                <h1 class='card-heading'>About</h1>
-                            </div>
-                            <div class="card-para-container">
-                                <p>Want to play GeoGuessr for free? Then you're at the right place! GlobeGuessr is basically GeoGuessr, but you can play unlimited number of times with multiple friends all for a cost of $0. </p>
-                                <br>
-                                <p>Also, I'd be very happy if you could help me buy me a coffee! It will motivate me to make this game even better :)</p>
-                                <a href="https://www.buymeacoffee.com/AB7zz" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-                            </div>
-                            
-                        </div>
+        <div class="row">
+        <!-- Navbar Start  -->
+            <div class="col-lg-12 col-sm-12 col-12 col-sm-12 mobile-bar">
+                <div class="nav-container row">
+                    <div class="ham-container col-lg-2 col-md-2 col-2 col-sm-2">
+                        <i style='color: white;' class="hamburger fas fa-bars"></i>
+                    </div>
+                    <div class="col-lg-7 col-md-7 col-7 col-sm-7">
+                        <a class='logo-container' href="">
+                            <img class='logo-img' src="images/logo.png" alt="logo">
+                        </a>
                     </div>
                 </div>
             </div>
-            <div id='createScreen' class="create">
-                <!-- <div class="black-cover"></div> -->
-                <div class="card-container">
-                    <div class="card-content row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="card-heading-container">
-                                <h1 class='card-heading'>Create room</h1>
+            <div class="col-lg-2 col-md-2 col-0 col-sm-0 side-bar">
+                <div class="logo-top">
+                    <a class='logo-container' href="">
+                        <img class='logo-img' src="images/logo.png" alt="logo">
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li id='chooseCreate' class="nav-tab active-btn">
+                        <a href="#">
+                            <i class="fas fa-plus-square"></i>
+                            <span id="hide-btn">
+                            Create room
+                            </span>
+                        </a>
+                    </li>
+                    <li id='chooseJoin' class="nav-tab">
+                        <a href="#">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span id="hide-btn">
+                            Join room
+                            </span>
+                        </a>
+                    </li>
+                    <li id='chooseHome' class="nav-tab">
+                        <a href="#">
+                            <i class="fas fa-info-circle"></i>
+                            <span id="hide-btn">
+                            About
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Navbar end  -->
+
+            
+            <!-- Right side content start -->
+            <div class="col-lg-10 col-md-10 col-12 col-sm-12  main-content p-5">
+                <div id='homeScreen' class="home">
+                    <div class="card-container">
+                        <div class="card-content row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card-heading-container">
+                                    <h1 class='card-heading'>About</h1>
+                                </div>
+                                <div class="card-para-container">
+                                    <p>Want to play GeoGuessr for free? Then you're at the right place! GlobeGuessr is basically GeoGuessr, but you can play unlimited number of times with multiple friends all for a cost of $0. </p>
+                                    <br>
+                                    <p>Also, I'd be very happy if you could help me buy me a coffee! It will motivate me to make this game even better :)</p>
+                                    <a href="https://www.buymeacoffee.com/AB7zz" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+                                </div>
+                                
                             </div>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="input-container">
-                                <input type="text" placeholder='Your name' class='input-box' id='chooseCreateName' required>
+                    </div>
+                </div>
+                <div id='createScreen' class="create">
+                    <!-- <div class="black-cover"></div> -->
+                    <div class="card-container">
+                        <div class="card-content row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card-heading-container">
+                                    <h1 class='card-heading'>Create room</h1>
+                                </div>
                             </div>
-                            <div class="input-container">
-                                <input type="text" placeholder='Your room name' class='input-box' id='chooseCreateRoom' required>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="input-container">
+                                    <input type="text" placeholder='Your name' class='input-box' id='chooseCreateName' required>
+                                </div>
+                                <div class="input-container">
+                                    <input type="text" placeholder='Your room name' class='input-box' id='chooseCreateRoom' required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mt-4 mb-4 col-12">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div id='modeCard1' class="card mb-4">
-                                            <img class='mode-img' src="images/world.jpg" alt="image">
-                                            <p class='mode-heading'>World</p>
-                                            <div class="mode-btn-container mb-3">
-                                                <button id='chooseMode1' class='btn btn-primary mode-btn' href="">Choose</button>
+                            <div class="mt-4 mb-4 col-12">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                                            <div id='modeCard1' class="card mb-4">
+                                                <img class='mode-img' src="images/world.jpg" alt="image">
+                                                <p class='mode-heading'>World</p>
+                                                <div class="mode-btn-container mb-3">
+                                                    <button id='chooseMode1' class='btn btn-primary mode-btn' href="">Choose</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div id='modeCard2' class="card mb-4">
-                                            <img class='mode-img' src="images/famous.jpg" alt="image">
-                                            <p class='mode-heading'>Famous Places</p>
-                                            <div class="mode-btn-container mb-3">
-                                                <button id='chooseMode2' class='btn btn-primary mode-btn' href="">Choose</button>
+                                        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                                            <div id='modeCard2' class="card mb-4">
+                                                <img class='mode-img' src="images/famous.jpg" alt="image">
+                                                <p class='mode-heading'>Famous Places</p>
+                                                <div class="mode-btn-container mb-3">
+                                                    <button id='chooseMode2' class='btn btn-primary mode-btn' href="">Choose</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div id='modeCard3' class="card mb-4">
-                                            <img class='mode-img' src="images/northamerica.jpg" alt="image">
-                                            <p class='mode-heading'>North America</p>
-                                            <div class="mode-btn-container mb-3">
-                                                <button id='chooseMode3' class='btn btn-primary mode-btn' href="">Choose</button>
+                                        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                                            <div id='modeCard3' class="card mb-4">
+                                                <img class='mode-img' src="images/northamerica.jpg" alt="image">
+                                                <p class='mode-heading'>North America</p>
+                                                <div class="mode-btn-container mb-3">
+                                                    <button id='chooseMode3' class='btn btn-primary mode-btn' href="">Choose</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div id='modeCard4' class="card mb-4">
-                                            <img class='mode-img' src="images/southamerica.jpg" alt="image">
-                                            <p class='mode-heading'>South America</p>
-                                            <div class="mode-btn-container mb-3">
-                                                <button id='chooseMode4' class='btn btn-primary mode-btn' href="">Choose</button>
+                                        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                                            <div id='modeCard4' class="card mb-4">
+                                                <img class='mode-img' src="images/southamerica.jpg" alt="image">
+                                                <p class='mode-heading'>South America</p>
+                                                <div class="mode-btn-container mb-3">
+                                                    <button id='chooseMode4' class='btn btn-primary mode-btn' href="">Choose</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div id='modeCard5' class="card mb-4">
-                                            <img class='mode-img' src="images/middleeast.jpg" alt="image">
-                                            <p class='mode-heading'>Middle East</p>
-                                            <div class="mode-btn-container mb-3">
-                                                <button id='chooseMode5' class='btn btn-primary mode-btn' href="">Choose</button>
+                                        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                                            <div id='modeCard5' class="card mb-4">
+                                                <img class='mode-img' src="images/middleeast.jpg" alt="image">
+                                                <p class='mode-heading'>Middle East</p>
+                                                <div class="mode-btn-container mb-3">
+                                                    <button id='chooseMode5' class='btn btn-primary mode-btn' href="">Choose</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div id='modeCard6' class="card mb-4">
-                                            <img id='modeImg' class='mode-img' src="images/europe.jpg" alt="image">
-                                            <p class='mode-heading'>Europe</p>
-                                            <div class="mode-btn-container mb-3">
-                                                <button id='chooseMode6' class='btn btn-primary mode-btn' href="">Choose</button>
+                                        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                                            <div id='modeCard6' class="card mb-4">
+                                                <img id='modeImg' class='mode-img' src="images/europe.jpg" alt="image">
+                                                <p class='mode-heading'>Europe</p>
+                                                <div class="mode-btn-container mb-3">
+                                                    <button id='chooseMode6' class='btn btn-primary mode-btn' href="">Choose</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div id='modeCard7' class="card mb-4">
-                                            <img class='mode-img' src="images/asia.jpg" alt="image">
-                                            <p class='mode-heading'>Asia</p>
-                                            <div class="mode-btn-container mb-3">
-                                                <button id='chooseMode7' class='btn btn-primary mode-btn' href="">Choose</button>
+                                        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                                            <div id='modeCard7' class="card mb-4">
+                                                <img class='mode-img' src="images/asia.jpg" alt="image">
+                                                <p class='mode-heading'>Asia</p>
+                                                <div class="mode-btn-container mb-3">
+                                                    <button id='chooseMode7' class='btn btn-primary mode-btn' href="">Choose</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div id='modeCard8' class="card mb-4">
-                                            <img class='mode-img' src="images/australia.jpg" alt="image">
-                                            <p class='mode-heading'>Australia</p>
-                                            <div class="mode-btn-container mb-3">
-                                                <button id='chooseMode8' class='btn btn-primary mode-btn' href="">Choose</button>
+                                        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                                            <div id='modeCard8' class="card mb-4">
+                                                <img class='mode-img' src="images/australia.jpg" alt="image">
+                                                <p class='mode-heading'>Australia</p>
+                                                <div class="mode-btn-container mb-3">
+                                                    <button id='chooseMode8' class='btn btn-primary mode-btn' href="">Choose</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div id='modeCard9' class="card mb-4">
-                                            <img class='mode-img' src="images/africa.jpg" alt="image">
-                                            <p class='mode-heading'>Africa</p>
-                                            <div class="mode-btn-container mb-3">
-                                                <button id='chooseMode9' class='btn btn-primary mode-btn' href="">Choose</button>
+                                        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                                            <div id='modeCard9' class="card mb-4">
+                                                <img class='mode-img' src="images/africa.jpg" alt="image">
+                                                <p class='mode-heading'>Africa</p>
+                                                <div class="mode-btn-container mb-3">
+                                                    <button id='chooseMode9' class='btn btn-primary mode-btn' href="">Choose</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="create-btn-container">
-                                <!-- <button id='chooseCreateConfirm' class='btn btn-success'>Confirm</button> -->
-                                <!-- <button style='margin-right: 15px;' id='playAgain' class='btn btn-success'>Play Again</button>
-                                <button id='exitGame' class='btn btn-danger'>Exit Game</button> -->
-                            </div>
-                            <div class="errorMsg" style='display: flex; justify-content: center; margin-top: 20px;'>
-                                <p style='color: red; font-weight: bold;' id='errorMessage'></p>
+                        <div id='popup' style='display: none;' class="animate__animated animate__zoomIn popup-container pop-up">
+                            <div class="popup-content">
+                                <h1 class='card-heading'>More settings</h1>
+                                <div class="input-container">
+                                    <label style='color: black;' for="">Enter the maximum number of rounds</label>
+                                    <input type="text" placeholder='ex: 7' class='input-box2' id='maxRounds' required>
+                                </div>
+                                <div class="input-container">
+                                    <label style='color: black;' for="">Enter the maximum number of room members</label>
+                                    <input type="text" placeholder='ex: 5' class='input-box2' id='maxPlayers' required>
+                                </div>
+                                <div class="input-container">
+                                    <label style='color: black;' for="">Enter the time limit for each round</label>
+                                    <input type="text" placeholder='ex: 60' class='input-box2' id='maxTime' required>
+                                </div>
+                                <div class="create-btn-container">
+                                    <button id='cancelPopup' class='btn btn-danger'>Cancel</button>
+                                    <button id='chooseCreateConfirm' class='btn btn-success'>Confirm</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div id='popup' style='display: none;' class="animate__animated animate__zoomIn popup-container pop-up">
-                        <div class="popup-content">
-                            <h1 class='card-heading'>More settings</h1>
-                            <div class="input-container">
-                                <label style='color: black;' for="">Enter the maximum number of rounds</label>
-                                <input type="text" placeholder='ex: 7' class='input-box2' id='maxRounds' required>
+                </div>
+                <div id='joinScreen' class="join">
+                    <div class="card-container">
+                        <div class="card-content row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card-heading-container">
+                                    <h1 class='card-heading'>Join room</h1>
+                                </div>
                             </div>
-                            <div class="input-container">
-                                <label style='color: black;' for="">Enter the maximum number of room members</label>
-                                <input type="text" placeholder='ex: 5' class='input-box2' id='maxPlayers' required>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="input-container">
+                                    <input id="chooseJoinName" type="text" placeholder='Your name' class='input-box' id='name' required>
+                                </div>
+                                <div class="input-container">
+                                    <input id="chooseJoinRoom" type="text" placeholder='Room name' class='input-box' id='name' required>
+                                </div>
                             </div>
-                            <div class="input-container">
-                                <label style='color: black;' for="">Enter the time limit for each round</label>
-                                <input type="text" placeholder='ex: 60' class='input-box2' id='maxTime' required>
+                            <div class="mt-4 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="create-btn-container">
+                                    <button id='chooseJoinConfirm' class='btn btn-success'>Join</button>
+                                </div>
+                                <div class="errorMsg" style='display: flex; justify-content: center; margin-top: 20px;'>
+                                    <p style='color: red; font-weight: bold;' id='errorMessage'></p>
+                                </div>
                             </div>
-                            <div class="create-btn-container">
-                                <button id='cancelPopup' class='btn btn-danger'>Cancel</button>
-                                <button id='chooseCreateConfirm' class='btn btn-success'>Confirm</button>
-                                <!-- <button style='margin-right: 15px;' id='playAgain' class='btn btn-success'>Play Again</button>
-                                <button id='exitGame' class='btn btn-danger'>Exit Game</button> -->
+                        </div>
+                    </div>
+                </div>
+                <div id='waitingScreen' class="waitingScreen">
+                    <div class="card-container">
+                        <div class="card-content row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card-heading-container">
+                                    <h1 class='card-heading'>Waiting list</h1>
+                                </div>
+                            </div>
+                            <div id="playersList" class="waiting-list-container mt-4">
+                                <!-- <span><i style='color: green;' class='fas fa-circle'></i> Abhinav CV</span>
+                                <span><i style='color: green;' class='fas fa-circle'></i> Abhinav CV</span>
+                                <span><i style='color: green;' class='fas fa-circle'></i> Abhinav CV</span>
+                                <span><i style='color: green;' class='fas fa-circle'></i> Abhinav CV</span>
+                                <span><i style='color: green;' class='fas fa-circle'></i> Abhinav CV</span> -->
+                            </div>
+                            <div class="mt-4 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="create-btn-container">
+                                    <button id='chooseStart' class='btn btn-success'>Start</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id='winnersScreen' class="winner">
+                    <div class="card-container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card-heading-container">
+                                    <h2 class='card-heading'>Winners</h2>
+                                </div>
+                            </div>
+                            <div style='margin-bottom: 50px;' id='winnersList'>
+                                <div class="row"><div class="col-md-4"><h2>2nd</h2><span>Abhinav CV</span></div><div class="col-md-4"><h2>1st</h2><span>Abhinav CV</span></div><div class="col-md-4"><h2>3rd</h2><span>Abhinav CV</span></div></div>
+                            </div>
+                            <div id='playExitBtn' class="create-btn-container">
+                                <button style='margin-right: 15px;' id='playAgain' class='btn btn-success'>Play Again</button>
+                                <button id='exitGame' class='btn btn-danger'>Exit Game</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id='joinScreen' class="join">
-                <div class="card-container">
-                    <div class="card-content row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="card-heading-container">
-                                <h1 class='card-heading'>Join room</h1>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="input-container">
-                                <input id="chooseJoinName" type="text" placeholder='Your name' class='input-box' id='name' required>
-                            </div>
-                            <div class="input-container">
-                                <input id="chooseJoinRoom" type="text" placeholder='Room name' class='input-box' id='name' required>
-                            </div>
-                        </div>
-                        <div class="mt-4 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="create-btn-container">
-                                <button id='chooseJoinConfirm' class='btn btn-success'>Join</button>
-                            </div>
-                            <div class="errorMsg" style='display: flex; justify-content: center; margin-top: 20px;'>
-                                <p style='color: red; font-weight: bold;' id='errorMessage'></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id='waitingScreen' class="waitingScreen">
-                <div class="card-container">
-                    <div class="card-content row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="card-heading-container">
-                                <h1 class='card-heading'>Waiting list</h1>
-                            </div>
-                        </div>
-                        <div id="playersList" class="waiting-list-container mt-4">
-                            <!-- <span><i style='color: green;' class='fas fa-circle'></i> Abhinav CV</span>
-                            <span><i style='color: green;' class='fas fa-circle'></i> Abhinav CV</span>
-                            <span><i style='color: green;' class='fas fa-circle'></i> Abhinav CV</span>
-                            <span><i style='color: green;' class='fas fa-circle'></i> Abhinav CV</span>
-                            <span><i style='color: green;' class='fas fa-circle'></i> Abhinav CV</span> -->
-                        </div>
-                        <div class="mt-4 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="create-btn-container">
-                                <button id='chooseStart' class='btn btn-success'>Start</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id='winnersScreen' class="winner">
-                <div class="card-container">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="card-heading-container">
-                                <h2 class='card-heading'>Winners</h2>
-                            </div>
-                        </div>
-                        <div style='margin-bottom: 50px;' id='winnersList'>
-                            <div class="row"><div class="col-md-4"><h2>2nd</h2><span>Abhinav CV</span></div><div class="col-md-4"><h2>1st</h2><span>Abhinav CV</span></div><div class="col-md-4"><h2>3rd</h2><span>Abhinav CV</span></div></div>
-                        </div>
-                        <div id='playExitBtn' class="create-btn-container">
-                            <button style='margin-right: 15px;' id='playAgain' class='btn btn-success'>Play Again</button>
-                            <button id='exitGame' class='btn btn-danger'>Exit Game</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <!-- Right side content end  -->
     </main>
+
+    
+    <!-- Game screen start -->
     <div id='gameScreen' class="gameScreen">
         <div id='street-view' class="street-view">
             <!-- <iframe src="https://www.google.com/maps/embed?pb=!4v1637485175121!6m8!1m7!1sCAoSLEFGMVFpcE5FaEE3TEV2RzROMlJlRkJLWVF1LW05MWFCbWp1dFNmNjhmSVVx!2m2!1d31.414199!2d27.00780599999996!3f278.0911907616493!4f-14.090972151271899!5f0.7820865974627469" style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden;" allowfullscreen="" loading="lazy"></iframe> -->
@@ -375,6 +364,9 @@
             <pre style="flex-grow: 1" id="distance"></pre>
         </div>
     </div>
+    <!-- Game screen end  -->
+
+
     <script src="js/index.js "></script>
     <script src="js/gmap.js "></script>
 </body>
