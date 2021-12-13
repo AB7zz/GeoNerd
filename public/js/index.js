@@ -750,7 +750,7 @@ socket.on('display-error', message => {
 socket.on('room-created', () => {
     playerId = 1;
     createScreen.style.display = 'none';
-    waitingScreen.style.display = 'block';
+    waitingScreen.style.display = 'flex';
     chooseCreate.disabled = true;
     chooseJoin.disabled = true;
     nextMap.style.display = 'block';
@@ -774,7 +774,7 @@ socket.on('room-joined', (roomId, rooms, pId) => {
     createScreen.style.display = 'none';
     joinScreen.style.display = 'none';
     chooseStart.style.display = 'none';
-    waitingScreen.style.display = 'block';
+    waitingScreen.style.display = 'flex';
     chooseCreate.disable = true;
     chooseJoin.disable = true;
 })
@@ -902,11 +902,12 @@ socket.on('winner-disp', rooms => {
     if(playerId!=1){
         playAgain.style.display = 'none';
     }
+    createScreen.style.display = 'none';
+    joinScreen.style.display = 'none';
     waitingScreen.style.display = 'none';
     nextMap.style.display = 'none';
     gameScreen.style.display = 'none';
-    startScreen.style.display = 'flex';
-    winnersScreen.style.display = 'flex';
+    startScreen.style.display = 'block';
     for(let i=0; i<rooms.length; i++){
         for(let j=i+1; j<rooms.length; j++){
             if(rooms[j][8]>rooms[i][8]){
@@ -917,32 +918,34 @@ socket.on('winner-disp', rooms => {
         }
     }
     // console.log(rooms);
-    if(rooms.length>=3){
+    if(rooms.length>=3){ 
         if(rooms[1][8]==rooms[0][8] && rooms[1][8]!=rooms[2][8]){
-            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>1st</span><h2>'+ rooms[1][4] + ', ' + rooms[0][4] + '</span></div><div class="col-md-4"><span>2nd</span><h2>'+ rooms[2][4] + '</h2></div></div>';
             scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + ',' + rooms[0][8] +'</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[2][8]+'</h2></div></div>';
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>1st</span><h2>'+ rooms[1][4] + ', ' + rooms[0][4] + '</span></div><div class="col-md-4"><span>2nd</span><h2>'+ rooms[2][4] + '</h2></div></div>';
         }else if(rooms[1][8]==rooms[2][8] && rooms[1][8]!=rooms[0][8]){
-            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>2nd</span><h2>'+ rooms[1][4] + ', ' + rooms[2][4] + '</h2></div><div class="col-md-4"><span>1st</span><h2>'+ rooms[0][4] + '</h2></div></div>';
             scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + ',' + rooms[2][8] +'</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[0][8]+'</h2></div></div>';
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>2nd</span><h2>'+ rooms[1][4] + ', ' + rooms[2][4] + '</h2></div><div class="col-md-4"><span>1st</span><h2>'+ rooms[0][4] + '</h2></div></div>';
         }else if(rooms[1][8]==rooms[2][8] && rooms[1][8]==rooms[0][8]){
-            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>1st</span><h2>'+ rooms[1][4] + ', ' + rooms[2][4] + ', ' + rooms[0][4] + '</h2></div></div>';
             scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + ',' + rooms[2][8] + ',' + rooms[0][8] + '</div></div>';
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>1st</span><h2>'+ rooms[1][4] + ', ' + rooms[2][4] + ', ' + rooms[0][4] + '</h2></div></div>';
         }else{
-            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>2nd</span><h2>'+ rooms[1][4] + '</h2></div><div class="col-md-4"><span>1st</span><h2>'+ rooms[0][4] + '</h2></div><div class="col-md-4"><span>3rd</span><h2>'+ rooms[2][4] + '</h2></div></div>';
             scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + '</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[0][8]+'</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[2][8]+'</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[2][8]+'</h2></div></div>';
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>2nd</span><h2>'+ rooms[1][4] + '</h2></div><div class="col-md-4"><span>1st</span><h2>'+ rooms[0][4] + '</h2></div><div class="col-md-4"><span>3rd</span><h2>'+ rooms[2][4] + '</h2></div></div>';
         }
     }else if(rooms.length==2){
         if(rooms[0][8]==rooms[1][8]){
-            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>1st</span><h2>'+ rooms[1][4] + ', ' + rooms[0][4] + '</h2></div></div>';
             scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + ',' + rooms[0][8] + '</h2></div></div>';
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>1st</span><h2>'+ rooms[1][4] + ', ' + rooms[0][4] + '</h2></div></div>';
         }else{
-            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>2nd</span><h2>'+ rooms[1][4] + '</h2></div><div class="col-md-4"><span>1st</span><h2>'+ rooms[0][4] + '</h2></div></div>';
             scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + '</h2></div><div class="winner-sect col-md-4"><h2>' + rooms[0][8] + '</h2></div></div>';
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>2nd</span><h2>'+ rooms[1][4] + '</h2></div><div class="col-md-4"><span>1st</span><h2>'+ rooms[0][4] + '</h2></div></div>';
         }
     }else if(rooms.length==1){
-        winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>1st</span><h2>'+ rooms[0][4] + '</h2></div></div>';
         scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[0][8] + '</h2></div></div>';
+        winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>1st</span><h2>'+ rooms[0][4] + '</h2></div></div>';
+        
     }
+    winnersScreen.style.display = 'flex';
     
 })
 
@@ -959,7 +962,7 @@ socket.on('all-users-clicked', () => {
 socket.on('play-again-screen', rooms => {
     winnersScreen.style.display = 'none';
     createScreen.style.display = 'none';
-    waitingScreen.style.display = 'block';
+    waitingScreen.style.display = 'flex';
     chooseCreate.disabled = true;
     chooseJoin.disabled = true;
     nextMap.style.display = 'block';
