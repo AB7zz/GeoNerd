@@ -32,6 +32,8 @@ const confirPin = document.getElementById('confirmPin');
 const nextMap = document.getElementById('nextMap');
 const playAgain = document.getElementById('playAgain');
 const exitGame = document.getElementById('exitGame');
+const cancelPopup = document.getElementById('cancelPopup');
+const playExitBtn = document.getElementById('playExitBtn');
 
 // Random
 const modeImg = document.getElementById('modeImg');
@@ -52,9 +54,8 @@ const playersScore = document.getElementById('playersScore');
 const roundDis = document.getElementById('roundDis');
 const timeDis = document.getElementById('timeDis');
 const winnersList = document.getElementById('winnersList');
-const playExitBtn = document.getElementById('playExitBtn');
 const popup = document.getElementById('popup');
-const cancelPopup = document.getElementById('cancelPopup');
+const scoresList = document.getElementById('scoresList');
 
 // Input
 const chooseCreateName = document.getElementById('chooseCreateName');
@@ -905,7 +906,7 @@ socket.on('winner-disp', rooms => {
     nextMap.style.display = 'none';
     gameScreen.style.display = 'none';
     startScreen.style.display = 'flex';
-    winnersScreen.style.display = 'block';
+    winnersScreen.style.display = 'flex';
     for(let i=0; i<rooms.length; i++){
         for(let j=i+1; j<rooms.length; j++){
             if(rooms[j][8]>rooms[i][8]){
@@ -918,22 +919,29 @@ socket.on('winner-disp', rooms => {
     // console.log(rooms);
     if(rooms.length>=3){
         if(rooms[1][8]==rooms[0][8] && rooms[1][8]!=rooms[2][8]){
-            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + ', ' + rooms[0][4] + '</span></div><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[2][4] + '</span></div></div>';
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>1st</span><h2>'+ rooms[1][4] + ', ' + rooms[0][4] + '</span></div><div class="col-md-4"><span>2nd</span><h2>'+ rooms[2][4] + '</h2></div></div>';
+            scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + ',' + rooms[0][8] +'</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[2][8]+'</h2></div></div>';
         }else if(rooms[1][8]==rooms[2][8] && rooms[1][8]!=rooms[0][8]){
-            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[1][4] + ', ' + rooms[2][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[0][4] + '</span></div></div>';
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>2nd</span><h2>'+ rooms[1][4] + ', ' + rooms[2][4] + '</h2></div><div class="col-md-4"><span>1st</span><h2>'+ rooms[0][4] + '</h2></div></div>';
+            scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + ',' + rooms[2][8] +'</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[0][8]+'</h2></div></div>';
         }else if(rooms[1][8]==rooms[2][8] && rooms[1][8]==rooms[0][8]){
-            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + ', ' + rooms[2][4] + ', ' + rooms[0][4] + '</span></div></div>';
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>1st</span><h2>'+ rooms[1][4] + ', ' + rooms[2][4] + ', ' + rooms[0][4] + '</h2></div></div>';
+            scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + ',' + rooms[2][8] + ',' + rooms[0][8] + '</div></div>';
         }else{
-            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[1][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[0][4] + '</span></div><div class="col-md-4"><h2>3rd</h2><span>'+ rooms[2][4] + '</span></div></div>';
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>2nd</span><h2>'+ rooms[1][4] + '</h2></div><div class="col-md-4"><span>1st</span><h2>'+ rooms[0][4] + '</h2></div><div class="col-md-4"><span>3rd</span><h2>'+ rooms[2][4] + '</h2></div></div>';
+            scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + '</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[0][8]+'</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[2][8]+'</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[2][8]+'</h2></div></div>';
         }
     }else if(rooms.length==2){
         if(rooms[0][8]==rooms[1][8]){
-            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>1st</h2><span>'+ rooms[1][4] + ', ' + rooms[0][4] + '</span></div></div>';
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>1st</span><h2>'+ rooms[1][4] + ', ' + rooms[0][4] + '</h2></div></div>';
+            scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + ',' + rooms[0][8] + '</h2></div></div>';
         }else{
-            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>2nd</h2><span>'+ rooms[1][4] + '</span></div><div class="col-md-4"><h2>1st</h2><span>'+ rooms[0][4] + '</span></div></div>';
+            winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>2nd</span><h2>'+ rooms[1][4] + '</h2></div><div class="col-md-4"><span>1st</span><h2>'+ rooms[0][4] + '</h2></div></div>';
+            scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + '</h2></div><div class="winner-sect col-md-4"><h2>' + rooms[0][8] + '</h2></div></div>';
         }
     }else if(rooms.length==1){
-        winnersList.innerHTML = '<div class="row"><div class="col-md-4"><h2>1st</h2><span>'+ rooms[0][4] + '</span></div></div>';
+        winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>1st</span><h2>'+ rooms[0][4] + '</h2></div></div>';
+        scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[0][8] + '</h2></div></div>';
     }
     
 })

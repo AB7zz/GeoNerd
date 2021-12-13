@@ -357,23 +357,15 @@ main {
   display: flex;
   justify-content: space-evenly;
   align-items: flex-start;
-  width: 500px;
+  width: 100%;
   position: absolute;
   z-index: 99999;
   margin-left: 100%;
 }
 
 .score-card{
-  background:#000;
+  background:#000000b3;
   padding: 15px;
-}
-
-#playersScore{
-  /* position:re  lative; */
-} 
-#playersScore table{
-    /* top: 0;
-    right: 0; */
 }
 
 .score-card table tr th, #playersScore table tr td{
@@ -400,7 +392,7 @@ tbody, td, tfoot, th, thead, tr  {
 }
 
 .randt{
-  background:#000;
+  background:#000000b3;
   padding: 15px;
 }
 
@@ -417,6 +409,11 @@ tbody, td, tfoot, th, thead, tr  {
   display: none;
   background: white !important;
   border-radius: 10px;
+}
+
+.winner-sect{
+  display: flex;
+  justify-content: center;
 }
 
 .animate__animated.animate__zoomIn {
