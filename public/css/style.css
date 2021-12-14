@@ -476,6 +476,9 @@ main .rowss{
     height: 150px;
     width: 250px;
   } */
+  .card-para-container{
+    padding: 50px;
+  }
   .main-content {
       margin-left: 0;
   }

@@ -917,7 +917,7 @@ socket.on('winner-disp', rooms => {
             }
         }
     }
-    // console.log(rooms);
+    // console.log(rooms); 
     if(rooms.length>=3){ 
         if(rooms[1][8]==rooms[0][8] && rooms[1][8]!=rooms[2][8]){
             scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + ',' + rooms[0][8] +'</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[2][8]+'</h2></div></div>';
