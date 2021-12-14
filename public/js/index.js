@@ -587,6 +587,7 @@ exitGame.addEventListener('click', () => {
 })
 
 socket.on('game-display', rooms => {
+    document.querySelector('meta[name="viewport"]').setAttribute("content","width=1000");
     playersScore.innerHTML = '<tr><th>Players</th><th>Score</th></tr>';
     for(let i=0; i<rooms.length; i++){
         playersScore.innerHTML+='<tr><td style="color: white;">' + rooms[i][4] + '</td><td style="color: white;">0</td></tr>';
@@ -899,6 +900,7 @@ socket.on('player-left', rooms => {
 })
 
 socket.on('winner-disp', rooms => {
+    document.querySelector('meta[name="viewport"]').setAttribute("content","width=device-width, initial-scale=1.0");
     if(playerId!=1){
         playAgain.style.display = 'none';
     }

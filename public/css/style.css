@@ -476,6 +476,9 @@ main .rowss{
     height: 150px;
     width: 250px;
   } */
+  #scoresList{
+    display: none;
+  }
   .card-para-container{
     padding: 50px;
   }
