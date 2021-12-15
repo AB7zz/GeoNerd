@@ -109,7 +109,6 @@ io.on('connection', socket => {
         }
         io.to(roomId).emit('street-display', locIndex, Cmode)
     })
-
     socket.on('score-inc', ({playerId, roomId, distance}) => {
         if(Math.round(distance) < 20){
             rooms[roomId][playerId-1][8] += 500;
