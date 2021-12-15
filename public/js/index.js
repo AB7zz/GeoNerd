@@ -916,7 +916,7 @@ socket.on('winner-disp', rooms => {
             scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + ',' + rooms[2][8] + ',' + rooms[0][8] + '</div></div>';
             winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>1st</span><h2>'+ rooms[1][4] + ', ' + rooms[2][4] + ', ' + rooms[0][4] + '</h2></div></div>';
         }else{
-            scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + '</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[0][8]+'</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[2][8]+'</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[2][8]+'</h2></div></div>';
+            scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + '</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[0][8]+'</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[2][8]+'</h2></div></div>';
             winnersList.innerHTML = '<div class="row"><div class="col-md-4"><span>2nd</span><h2>'+ rooms[1][4] + '</h2></div><div class="col-md-4"><span>1st</span><h2>'+ rooms[0][4] + '</h2></div><div class="col-md-4"><span>3rd</span><h2>'+ rooms[2][4] + '</h2></div></div>';
         }
     }else if(rooms.length==2){
