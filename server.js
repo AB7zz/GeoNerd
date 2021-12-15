@@ -141,9 +141,9 @@ io.on('connection', socket => {
         io.to(roomId).emit('score-upd', rooms[roomId])
     })
 
-    socket.on('user-confirmed', () => {
+    socket.on('user-confirmed', roomId => {
         confirmCnt++;
-        if(confirmCnt == rooms[rId].length){//fix this part, can't read property of length
+        if(confirmCnt == rooms[roomId].length){//fix this part, can't read property of length
             // Finish button shows up when 2 players first play, and after finishing, when they play again and then one player leaves
             //Immediately went to Round 2 when 3 people were playing
             io.to(rId).emit('all-users-clicked');

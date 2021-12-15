@@ -687,7 +687,7 @@ confirPin.addEventListener('click', () => {
     confirPin.innerText = 'Confirmed!';
     disDisplay.innerHTML = '<p>You are <b id="distance"></b> km out!</p>';
     confirPin.disabled = true;
-    socket.emit('user-confirmed');
+    socket.emit('user-confirmed', roomId);
 })
 // let nxt = 0;
 nextMap.addEventListener('click', () => {
