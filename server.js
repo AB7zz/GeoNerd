@@ -60,7 +60,6 @@ io.on('connection', socket => {
             socket.emit('host-connected', host, roomId)
             socket.emit('room-created', roomId)
             console.log('Host Connected')
-            console.log(rooms[roomId]);
         }
     })
 
@@ -89,20 +88,19 @@ io.on('connection', socket => {
             userConnected(socket.client.id)
             joinRoom(roomId, Cmode, socket.client.id, player, rooms[roomId][0][5], rooms[roomId][0][6], rooms[roomId][0][7], score, started)
             io.to(roomId).emit('player-connected', rooms[roomId], roomId)
-            let index = rooms[roomId].length-1
-            pId = rooms[roomId][index][2]
+            let index = rooms[roomId].length-1;
+            pId = rooms[roomId].length;
             socket.emit('room-joined', roomId, rooms[roomId], rooms[roomId][index][2])
-            console.log('Player Joined')
-            console.log(rooms[roomId]);
+            console.log('Player', pId, 'Joined')
         }
     })
 
     socket.on('start-game', roomId => {
         io.to(roomId).emit('game-display', rooms[roomId])
     })
-    let call = 0;
+    // let call = 0;
     socket.on('display-street', ({roomId, locIndex}) => {
-        call++;
+        // call++;
         started = 1;
         for(let i=0;i<rooms[roomId].length; i++){
             rooms[roomId][i][9] = 1;
@@ -110,28 +108,34 @@ io.on('connection', socket => {
         io.to(roomId).emit('street-display', locIndex, Cmode)
     })
     socket.on('score-inc', ({playerId, roomId, distance}) => {
-        if(Math.round(distance) < 20){
-            rooms[roomId][playerId-1][8] += 500;
-        }else if(Math.round(distance) > 20 && Math.round(distance) < 100){
-            rooms[roomId][playerId-1][8] += 400;
-        }else if(Math.round(distance) > 100 && Math.round(distance) < 500){
-            rooms[roomId][playerId-1][8] += 350;
-        }else if(Math.round(distance) > 500 && Math.round(distance) < 1000){
-            rooms[roomId][playerId-1][8] += 300;
-        }else if(Math.round(distance) > 1000 && Math.round(distance) < 1500){
-            rooms[roomId][playerId-1][8] += 250;
-        }else if(Math.round(distance) > 1500 && Math.round(distance) < 2500){
-            rooms[roomId][playerId-1][8] += 200;
-        }else if(Math.round(distance) > 2500 && Math.round(distance) < 5000){
-            rooms[roomId][playerId-1][8] += 150;
-        }else if(Math.round(distance) > 5000 && Math.round(distance) < 7000){
-            rooms[roomId][playerId-1][8] += 100;
-        }else if(Math.round(distance) > 7000 && Math.round(distance) < 10000){
-            rooms[roomId][playerId-1][8] += 50;
-        }else if(Math.round(distance) > 1000){  
-            rooms[roomId][playerId-1][8] += 0;
+        let scoreIndex = '';
+        for(let i=0;i<rooms[rId].length; i++){
+            if(playerId==rooms[rId][i][2]){
+                scoreIndex = i;
+            }
         }
-        console.log(rooms[roomId])
+        if(Math.round(distance) < 20){
+            rooms[roomId][scoreIndex][8] += 500;
+        }else if(Math.round(distance) > 20 && Math.round(distance) < 100){
+            rooms[roomId][scoreIndex][8] += 400;
+        }else if(Math.round(distance) > 100 && Math.round(distance) < 500){
+            rooms[roomId][scoreIndex][8] += 350;
+        }else if(Math.round(distance) > 500 && Math.round(distance) < 1000){
+            rooms[roomId][scoreIndex][8] += 300;
+        }else if(Math.round(distance) > 1000 && Math.round(distance) < 1500){
+            rooms[roomId][scoreIndex][8] += 250;
+        }else if(Math.round(distance) > 1500 && Math.round(distance) < 2500){
+            rooms[roomId][scoreIndex][8] += 200;
+        }else if(Math.round(distance) > 2500 && Math.round(distance) < 5000){
+            rooms[roomId][scoreIndex][8] += 150;
+        }else if(Math.round(distance) > 5000 && Math.round(distance) < 7000){
+            rooms[roomId][scoreIndex][8] += 100;
+        }else if(Math.round(distance) > 7000 && Math.round(distance) < 10000){
+            rooms[roomId][scoreIndex][8] += 50;
+        }else if(Math.round(distance) > 1000){  
+            rooms[roomId][scoreIndex][8] += 0;
+        }
+        // console.log(rooms[roomId])
         io.to(roomId).emit('score-upd', rooms[roomId])
     })
 
@@ -149,23 +153,29 @@ io.on('connection', socket => {
     })
 
     socket.on('play-again', roomId => {
-        console.log(rooms[roomId])
+        // console.log(rooms[roomId])
         for(let i=0;i<rooms[roomId].length; i++){
             rooms[roomId][i][9] = 0;
             rooms[roomId][i][8] = 0;
         }
-        console.log(rooms[roomId])
+        // console.log(rooms[roomId])
         io.to(roomId).emit('play-again-screen', rooms[roomId])
     })
 
     socket.on('disconnect', () => {
+        let leftIndex = '';
         if(rooms[rId]){
             if(rooms[rId][0][3]==socket.client.id){
                 io.to(rId).emit('winner-disp', rooms[rId])
                 exitRoom(rId)
             }else{
-                leaveRoom(rId, pId)
+                for(let i=0;i<rooms[rId].length; i++){
+                    if(socket.client.id==rooms[rId][i][3]){
+                        leftIndex = i;
+                    }
+                }
                 io.to(rId).emit('player-left', rooms[rId])
+                leaveRoom(rId, leftIndex)
             }
         }
     })

@@ -6,17 +6,18 @@ const createRoom = (roomId, mode, playerSocketId, host, rounds, playerLim, timeL
 
     
     rooms[roomId].push([roomId, mode, rooms[roomId].length+1, playerSocketId, host, rounds, playerLim, timeLim, score, started])
-    console.log(rooms[roomId])
+    // console.log(rooms[roomId])
 }
 
 const joinRoom = (roomId, mode, playerSocketId, player, rounds, playerLim, timeLim, score, started) => {
     rooms[roomId].push([roomId, mode, rooms[roomId].length+1, playerSocketId, player, rounds, playerLim, timeLim, score, started])
-    console.log(rooms[roomId])
+    // console.log(rooms[roomId])
 }
 
-const leaveRoom = (roomId, playerId) => {
-    rooms[roomId].splice(playerId-1, 1)
-    console.log('Player',playerId,'exited')
+const leaveRoom = (roomId, leftIndex) => {
+    rooms[roomId].splice(leftIndex, 1)
+    console.log('Player',leftIndex+1,'exited')
+    console.log(rooms[roomId]);
 }
 
 const exitRoom = roomId => {
