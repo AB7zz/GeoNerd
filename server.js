@@ -60,6 +60,7 @@ io.on('connection', socket => {
             socket.emit('host-connected', host, roomId)
             socket.emit('room-created', roomId)
             console.log('Host Connected')
+            console.log(rooms[roomId])
         }
     })
 
@@ -92,6 +93,7 @@ io.on('connection', socket => {
             pId = rooms[roomId].length;
             socket.emit('room-joined', roomId, rooms[roomId], rooms[roomId][index][2])
             console.log('Player', pId, 'Joined')
+            console.log(rooms[roomId])
         }
     })
 
