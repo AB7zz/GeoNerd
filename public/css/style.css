@@ -412,8 +412,8 @@ tbody, td, tfoot, th, thead, tr  {
 }
 
 .winner-sect{
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
 }
 
 .animate__animated.animate__zoomIn {
@@ -557,4 +557,8 @@ main .rowss{
   .input-box{
     font-size: small;
   }
+}
+
+.row .side-bar{
+  padding-right: 0 !important;
 }
