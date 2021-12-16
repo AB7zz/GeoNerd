@@ -580,7 +580,7 @@ playAgain.addEventListener('click', () => {
 })
 
 exitGame.addEventListener('click', () => {
-    console.log('exitGame is clicked');
+    // console.log('exitGame is clicked');
     window.location.reload();
 })
 
@@ -772,15 +772,15 @@ socket.on('room-joined', (rooms, sId) => {
     chooseCreate.disable = true;
     chooseJoin.disable = true;
 })
-let st = 0;
+// let st = 0;
 socket.on('street-display', (locIndex, Cmode) => {
     confirPin.disabled = false;
     disDisplay.innerHTML = '';
     stopCount = false;
     round++;
     roundDis.innerHTML = "<span class='round' style='color: white;'>Round: " + round + "/" + rounds + " </span>";
-    st++;
-    console.log('Street display is called', st);
+    // st++;
+    // console.log('Street display is called', st);
     confirPin.innerText = 'Confirm';
     mode = Cmode;
     initMap();
