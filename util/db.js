@@ -19,7 +19,7 @@ const leaveRoom = (roomId, leftIndex) => {
     if(rooms[roomId]){
         if(leftIndex!=0 || leftIndex!='0'){
             rooms[roomId].splice(leftIndex, 1)
-            console.log('Player',leftIndex+1,'exited')
+            console.log('Player',leftIndex+1,'left the room', roomId)
             for(let i=1;i<rooms[roomId].length; i++){
                 if(rooms[roomId][i][2]-1!=rooms[roomId][i-1][2]){
                     rooms[roomId][i][2] -= 1;
@@ -35,7 +35,7 @@ const leaveRoom = (roomId, leftIndex) => {
 
 const exitRoom = roomId => {
     delete rooms[roomId]
-    console.log('Host exited')
+    console.log('Host left',roomId)
 }
 
 module.exports = {rooms, createRoom, joinRoom, leaveRoom, exitRoom}

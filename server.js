@@ -60,7 +60,7 @@ io.on('connection', socket => {
             createRoom(roomId, mode, socket.client.id, host, rounds, playerLim, timeLim, score, started, roundsPlayed)
             socket.emit('host-connected', host, rooms[roomId][0][3])
             socket.emit('room-created', roomId)
-            console.log('Host Connected')
+            console.log('A room is created', roomId)
             console.log(rooms[roomId])
         }
     })
@@ -93,7 +93,7 @@ io.on('connection', socket => {
             let index = rooms[roomId].length-1;
             pId = rooms[roomId].length;
             socket.emit('room-joined', rooms[roomId], rooms[roomId][index][3])
-            console.log('Player', pId, 'Joined')
+            console.log('Player', pId, 'Joined', roomId)
             console.log(rooms[roomId])
         }
     })
@@ -102,12 +102,10 @@ io.on('connection', socket => {
         io.to(roomId).emit('game-display', rooms[roomId])
         socket.emit('click-next');
     })
-    // let call = 0;
     socket.on('display-street', ({roomId, locIndex}) => {
         for(let i=0;i<rooms[roomId].length; i++){
             rooms[roomId][i][11] = false;
         }
-        // call++;
         started = 1;
         for(let i=0;i<rooms[roomId].length; i++){
             rooms[roomId][i][9] = 1;
@@ -142,7 +140,6 @@ io.on('connection', socket => {
         }else if(Math.round(distance) > 1000){  
             rooms[roomId][scoreIndex][8] += 0;
         }
-        // console.log(rooms[roomId])
         io.to(roomId).emit('score-upd', rooms[roomId])
     })
 
@@ -166,7 +163,6 @@ io.on('connection', socket => {
     })
 
     socket.on('play-again', roomId => {
-        // console.log(rooms[roomId])
         roundsPlayed++;
         for(let i=0;i<rooms[roomId].length; i++){
             rooms[roomId][i][9] = 0;
@@ -174,8 +170,8 @@ io.on('connection', socket => {
             rooms[roomId][i][10] = roundsPlayed;
             rooms[roomId][i][11] = false;
         }
-        // console.log(rooms[roomId])
         io.to(roomId).emit('play-again-screen', rooms[roomId])
+        console.log(roomId, 'is playing again for the',roundsPlayed, 'time')
     })
 
     socket.on('disconnect', () => {

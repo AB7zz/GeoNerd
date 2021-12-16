@@ -580,7 +580,6 @@ playAgain.addEventListener('click', () => {
 })
 
 exitGame.addEventListener('click', () => {
-    // console.log('exitGame is clicked');
     window.location.reload();
 })
 
@@ -599,14 +598,10 @@ socket.on('click-next', () =>{
     nextMap.click();
 })
 
-// let gen = 0;
 function genRandWorld(){
-    // gen++;
-    // console.log('genRandWorld() is called', gen);
     locIndex = Math.floor(Math.random(worldLocs.length)*worldLocs.length);
     if(!chosenLocs[locIndex]){
         chosenLocs[locIndex] = 1;
-        // console.log('I am calling street-display');
         socket.emit('display-street', ({roomId, locIndex}));
     }else{
         genRandWorld();
@@ -692,10 +687,7 @@ confirPin.addEventListener('click', () => {
     confirPin.disabled = true;
     socket.emit('user-confirmed', roomId, socketId);
 })
-// let nxt = 0;
 nextMap.addEventListener('click', () => {
-    // nxt++;
-    // console.log('nextMap is called', nxt);
     nextMap.style.display = 'none';
     
     nextCnt++;
@@ -772,15 +764,12 @@ socket.on('room-joined', (rooms, sId) => {
     chooseCreate.disable = true;
     chooseJoin.disable = true;
 })
-// let st = 0;
 socket.on('street-display', (locIndex, Cmode) => {
     confirPin.disabled = false;
     disDisplay.innerHTML = '';
     stopCount = false;
     round++;
     roundDis.innerHTML = "<span class='round' style='color: white;'>Round: " + round + "/" + rounds + " </span>";
-    // st++;
-    // console.log('Street display is called', st);
     confirPin.innerText = 'Confirm';
     mode = Cmode;
     initMap();
@@ -849,7 +838,6 @@ socket.on('street-display', (locIndex, Cmode) => {
     document.getElementById('destLat').value = destLat;
     document.getElementById('destLong').value = destLong;
     destination = parseFloat(destLat) + ',' + parseFloat(destLong);
-    // console.log('Destination:',destination);
 
     async function countdown() {
         return new Promise((res, rej) => {
@@ -866,7 +854,6 @@ socket.on('street-display', (locIndex, Cmode) => {
                 res()
             }
             timeDis.innerHTML = "<span class='time' style='color: white;'>00" + ":" + (seconds < 10 ? "0" : "") + String(seconds) + "</span>"; 
-            // console.log(seconds) 
             seconds--;
           }, 1000);
         });
@@ -912,7 +899,6 @@ socket.on('winner-disp', rooms => {
             }
         }
     }
-    // console.log(rooms); 
     if(rooms.length>=3){ 
         if(rooms[1][8]==rooms[0][8] && rooms[1][8]!=rooms[2][8]){
             scoresList.innerHTML = '<div class="row"><div class="winner-sect col-md-4"><h2>' + rooms[1][8] + ',' + rooms[0][8] +'</h2></div><div class="winner-sect col-md-4"><h2>'+rooms[2][8]+'</h2></div></div>';
@@ -960,8 +946,7 @@ socket.on('play-again-screen', rooms => {
     createScreen.style.display = 'none';
     waitingScreen.style.display = 'flex';
     chooseCreate.disabled = true;
-    chooseJoin.disabled = true;
-    // nextMap.style.display = 'block';    
+    chooseJoin.disabled = true; 
     playersList.innerHTML = '';
     round = 0;
     nextCnt = 0;
