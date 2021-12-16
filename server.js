@@ -6,7 +6,7 @@ const { emit } = require('process')
 const server = http.createServer(app)
 const socketio = require('socket.io')
 const {rooms, createRoom, joinRoom, leaveRoom, exitRoom} = require('./util/db.js')
-const {userConnected} = require('./util/users.js')
+const {connectedUsers, userConnected} = require('./util/users.js')
 app.use(express.static(path.join(__dirname, 'public')))
 const io = socketio(server)
 let Cmode = 0
@@ -58,7 +58,7 @@ io.on('connection', socket => {
             userConnected(socket.client.id)
             started = 0;
             createRoom(roomId, mode, socket.client.id, host, rounds, playerLim, timeLim, score, started, roundsPlayed)
-            socket.emit('host-connected', host, roomId)
+            socket.emit('host-connected', host, rooms[roomId][0][3])
             socket.emit('room-created', roomId)
             console.log('Host Connected')
             console.log(rooms[roomId])
@@ -89,10 +89,10 @@ io.on('connection', socket => {
             socket.join(roomId)
             userConnected(socket.client.id)
             joinRoom(roomId, Cmode, socket.client.id, player, rooms[roomId][0][5], rooms[roomId][0][6], rooms[roomId][0][7], score, rooms[roomId][0][9])
-            io.to(roomId).emit('player-connected', rooms[roomId], roomId)
+            io.to(roomId).emit('player-connected', rooms[roomId])
             let index = rooms[roomId].length-1;
             pId = rooms[roomId].length;
-            socket.emit('room-joined', roomId, rooms[roomId], rooms[roomId][index][2])
+            socket.emit('room-joined', rooms[roomId], rooms[roomId][index][3])
             console.log('Player', pId, 'Joined')
             console.log(rooms[roomId])
         }
@@ -100,9 +100,13 @@ io.on('connection', socket => {
 
     socket.on('start-game', roomId => {
         io.to(roomId).emit('game-display', rooms[roomId])
+        socket.emit('click-next');
     })
     // let call = 0;
     socket.on('display-street', ({roomId, locIndex}) => {
+        for(let i=0;i<rooms[roomId].length; i++){
+            rooms[roomId][i][11] = false;
+        }
         // call++;
         started = 1;
         for(let i=0;i<rooms[roomId].length; i++){
@@ -110,10 +114,10 @@ io.on('connection', socket => {
         }
         io.to(roomId).emit('street-display', locIndex, Cmode)
     })
-    socket.on('score-inc', ({playerId, roomId, distance}) => {
+    socket.on('score-inc', ({socketId, roomId, distance}) => {
         let scoreIndex = '';
-        for(let i=0;i<rooms[rId].length; i++){
-            if(playerId==rooms[rId][i][2]){
+        for(let i=0;i<rooms[roomId].length; i++){
+            if(socketId==rooms[roomId][i][3]){
                 scoreIndex = i;
             }
         }
@@ -142,11 +146,16 @@ io.on('connection', socket => {
         io.to(roomId).emit('score-upd', rooms[roomId])
     })
 
-    socket.on('user-confirmed', roomId => {
+    socket.on('user-confirmed', (roomId, socketId) => {
+        let clickedIndex = '';
+        for(let i=0;i<rooms[roomId].length; i++){
+            if(socketId==rooms[roomId][i][3]){
+                clickedIndex = i;
+            }
+        }
+        rooms[roomId][clickedIndex][11] = true;
         confirmCnt++;
         if(confirmCnt == rooms[roomId].length){
-            // While playing again, mode changed
-            // Round exceeded while playing again. This happens when a new player joins in the waiting room while playing again.
             io.to(rId).emit('all-users-clicked');
             confirmCnt = 0;
         }
@@ -154,7 +163,6 @@ io.on('connection', socket => {
 
     socket.on('round-over', () => {
         io.to(rId).emit('winner-disp', rooms[rId])
-        // exitRoom(rId)
     })
 
     socket.on('play-again', roomId => {
@@ -164,6 +172,7 @@ io.on('connection', socket => {
             rooms[roomId][i][9] = 0;
             rooms[roomId][i][8] = 0;
             rooms[roomId][i][10] = roundsPlayed;
+            rooms[roomId][i][11] = false;
         }
         // console.log(rooms[roomId])
         io.to(roomId).emit('play-again-screen', rooms[roomId])
@@ -171,18 +180,23 @@ io.on('connection', socket => {
 
     socket.on('disconnect', () => {
         let leftIndex = '';
-        if(rooms[rId]){
-            if(rooms[rId][0][3]==socket.client.id){
-                io.to(rId).emit('winner-disp', rooms[rId])
-                exitRoom(rId)
-            }else{
-                for(let i=0;i<rooms[rId].length; i++){
-                    if(socket.client.id==rooms[rId][i][3]){
-                        leftIndex = i;
+        if(connectedUsers[socket.client.id]){
+            if(rooms[rId]){
+                if(rooms[rId][0][3]==socket.client.id){
+                    io.to(rId).emit('winner-disp', rooms[rId])
+                    exitRoom(rId)
+                }else{
+                    for(let i=0;i<rooms[rId].length; i++){
+                        if(socket.client.id==rooms[rId][i][3]){
+                            leftIndex = i;
+                            if(rooms[rId][leftIndex][11]==true){
+                                confirmCnt--;
+                            }
+                        }
                     }
+                    leaveRoom(rId, leftIndex)
+                    io.to(rId).emit('player-left', rooms[rId])
                 }
-                io.to(rId).emit('player-left', rooms[rId])
-                leaveRoom(rId, leftIndex)
             }
         }
     })

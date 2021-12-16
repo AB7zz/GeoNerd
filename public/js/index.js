@@ -73,6 +73,7 @@ let mode = '';
 let host = '';
 let player = '';
 let playerLim = '';
+let socketId = 0;
 let playerId = 0;
 let roomId = '';    
 let locIndex;
@@ -592,8 +593,10 @@ socket.on('game-display', rooms => {
     startScreen.style.display = 'none';
     waitingScreen.style.display = 'none';
     gameScreen.style.display = 'block';
+})
+
+socket.on('click-next', () =>{
     nextMap.click();
-    
 })
 
 // let gen = 0;
@@ -687,7 +690,7 @@ confirPin.addEventListener('click', () => {
     confirPin.innerText = 'Confirmed!';
     disDisplay.innerHTML = '<p>You are <b id="distance"></b> km out!</p>';
     confirPin.disabled = true;
-    socket.emit('user-confirmed', roomId);
+    socket.emit('user-confirmed', roomId, socketId);
 })
 // let nxt = 0;
 nextMap.addEventListener('click', () => {
@@ -742,13 +745,14 @@ socket.on('room-created', () => {
     nextMap.style.display = 'block';
 })
 
-socket.on('host-connected', (host, roomId) => {
+socket.on('host-connected', (host, sId) => {
+    socketId = sId;
     playersList.innerHTML = "<span><i style='color: green; font-weight: bold;' class='fas fa-circle'></i> " + host + "</span><br>";
 })
 
-socket.on('player-connected', (rooms, roomId) => {
+socket.on('player-connected', rooms => {
     if(rooms[0][10]>0){
-        round = 0-(rooms.length-1);
+        round = 0;
     }
     timeLim = rooms[0][7];
     playersList.innerHTML = '';
@@ -757,9 +761,9 @@ socket.on('player-connected', (rooms, roomId) => {
     }
 })
 
-socket.on('room-joined', (roomId, rooms, pId) => {
+socket.on('room-joined', (rooms, sId) => {
     mode = rooms[0][1];
-    playerId = pId;
+    socketId = sId;
     rounds = rooms[0][5];
     createScreen.style.display = 'none';
     joinScreen.style.display = 'none';
@@ -768,15 +772,15 @@ socket.on('room-joined', (roomId, rooms, pId) => {
     chooseCreate.disable = true;
     chooseJoin.disable = true;
 })
-// let st = 0;
+let st = 0;
 socket.on('street-display', (locIndex, Cmode) => {
     confirPin.disabled = false;
     disDisplay.innerHTML = '';
     stopCount = false;
     round++;
     roundDis.innerHTML = "<span class='round' style='color: white;'>Round: " + round + "/" + rounds + " </span>";
-    // st++;
-    // console.log('Street display is called', st);
+    st++;
+    console.log('Street display is called', st);
     confirPin.innerText = 'Confirm';
     mode = Cmode;
     initMap();
@@ -957,9 +961,9 @@ socket.on('play-again-screen', rooms => {
     waitingScreen.style.display = 'flex';
     chooseCreate.disabled = true;
     chooseJoin.disabled = true;
-    nextMap.style.display = 'block';    
+    // nextMap.style.display = 'block';    
     playersList.innerHTML = '';
-    round = 0-(rooms.length-1);
+    round = 0;
     nextCnt = 0;
     for(let i=0; i<rooms.length; i++){
         playersList.innerHTML += "<span><i style='color: green;' class='fas fa-circle'></i> " + rooms[i][4] + "</span><br>";

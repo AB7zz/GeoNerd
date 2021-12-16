@@ -117,7 +117,7 @@ confirmPin.addEventListener('click', () => {
     });
             calcDistance(document.getElementById('latitude').value,document.getElementById('destLat').value,document.getElementById('longitude').value,document.getElementById('destLong').value);
             document.getElementById("distance").innerText = Math.round(distance).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            socket.emit('score-inc', ({playerId, roomId, distance}));
+            socket.emit('score-inc', ({socketId, roomId, distance}));
 
         deleteMarkers(markersArray);
 
