@@ -15,6 +15,7 @@ let rId = ''
 let pId = ''
 let confirmCnt = 0;
 let started = 0;
+let roundsPlayed = 0;
 io.on('connection', socket => {
     socket.on('create-room', ({host, mode, roomId, rounds, timeLim, playerLim}) => {
         Cmode = mode
@@ -56,7 +57,7 @@ io.on('connection', socket => {
             socket.join(roomId)
             userConnected(socket.client.id)
             started = 0;
-            createRoom(roomId, mode, socket.client.id, host, rounds, playerLim, timeLim, score, started)
+            createRoom(roomId, mode, socket.client.id, host, rounds, playerLim, timeLim, score, started, roundsPlayed)
             socket.emit('host-connected', host, roomId)
             socket.emit('room-created', roomId)
             console.log('Host Connected')
@@ -87,7 +88,7 @@ io.on('connection', socket => {
         }else{
             socket.join(roomId)
             userConnected(socket.client.id)
-            joinRoom(roomId, Cmode, socket.client.id, player, rooms[roomId][0][5], rooms[roomId][0][6], rooms[roomId][0][7], score, started)
+            joinRoom(roomId, Cmode, socket.client.id, player, rooms[roomId][0][5], rooms[roomId][0][6], rooms[roomId][0][7], score, rooms[roomId][0][9])
             io.to(roomId).emit('player-connected', rooms[roomId], roomId)
             let index = rooms[roomId].length-1;
             pId = rooms[roomId].length;
@@ -143,9 +144,9 @@ io.on('connection', socket => {
 
     socket.on('user-confirmed', roomId => {
         confirmCnt++;
-        if(confirmCnt == rooms[roomId].length){//fix this part, can't read property of length
-            // Finish button shows up when 2 players first play, and after finishing, when they play again and then one player leaves
-            //Immediately went to Round 2 when 3 people were playing
+        if(confirmCnt == rooms[roomId].length){
+            // While playing again, mode changed
+            // Round exceeded while playing again. This happens when a new player joins in the waiting room while playing again.
             io.to(rId).emit('all-users-clicked');
             confirmCnt = 0;
         }
@@ -158,9 +159,11 @@ io.on('connection', socket => {
 
     socket.on('play-again', roomId => {
         // console.log(rooms[roomId])
+        roundsPlayed++;
         for(let i=0;i<rooms[roomId].length; i++){
             rooms[roomId][i][9] = 0;
             rooms[roomId][i][8] = 0;
+            rooms[roomId][i][10] = roundsPlayed;
         }
         // console.log(rooms[roomId])
         io.to(roomId).emit('play-again-screen', rooms[roomId])

@@ -747,6 +747,9 @@ socket.on('host-connected', (host, roomId) => {
 })
 
 socket.on('player-connected', (rooms, roomId) => {
+    if(rooms[0][10]>0){
+        round = 0-(rooms.length-1);
+    }
     timeLim = rooms[0][7];
     playersList.innerHTML = '';
     for(let i=0; i<rooms.length; i++){
@@ -755,6 +758,7 @@ socket.on('player-connected', (rooms, roomId) => {
 })
 
 socket.on('room-joined', (roomId, rooms, pId) => {
+    mode = rooms[0][1];
     playerId = pId;
     rounds = rooms[0][5];
     createScreen.style.display = 'none';
@@ -947,6 +951,7 @@ socket.on('all-users-clicked', () => {
 })
 
 socket.on('play-again-screen', rooms => {
+    nextMap.innerText = 'Next';
     winnersScreen.style.display = 'none';
     createScreen.style.display = 'none';
     waitingScreen.style.display = 'flex';
