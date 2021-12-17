@@ -38,6 +38,15 @@ io.on('connection', socket => {
         }else if(playerLim==""){
             const message = "Please enter the max number of room members"
             socket.emit('display-error', message)
+        }else if(host.length>10){
+            const message = "Name cannot exceed 10 letters"
+            socket.emit('display-error', message)
+        }else if(roomId.length>30){
+            const message = "Room ID cannot exceed 30 letters"
+            socket.emit('display-error', message)
+        }else if(mode!='world' || mode!='famous' || mode!='northamerica' || mode!='southamerica' || mode!='middleeast' || mode!='asia' || mode!='africa' || mode!='europe' || mode!='australia' || isNum(mode)){
+            const message = "No such mode exists"
+            socket.emit('display-error', message)
         }
         else if(isNaN(rounds)){
             console.log(typeof playerLim)
