@@ -216,7 +216,7 @@ main {
   padding: 10px;
   border-radius: 10px;
   font-family: 'Fredoka One', cursive;
-  color: #696969;
+  color: rgb(87, 87, 87);
   transition: 0.4s;
   outline: none !important;
   border: none !important;
@@ -229,12 +229,34 @@ main {
   transition: 0.4s;
 }
 
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color:    #b6b6b6;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+ color:    #b6b6b6;
+ opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+ color:    #b6b6b6;
+ opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color:    #b6b6b6;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+ color:    #b6b6b6;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+ color:    #b6b6b6;
+}
+
 .input-box2{
   width: 100%;
   padding: 10px;
   border-radius: 10px;
   font-family: 'Fredoka One', cursive;
-  color: #696969;
+  color: rgb(87, 87, 87);
   transition: 0.4s;
   outline: none !important;
   border: none !important;

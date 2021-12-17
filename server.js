@@ -104,6 +104,12 @@ io.on('connection', socket => {
         }else if(roomId==""){
             const message = "Please enter a room name"
             socket.emit('display-error', message)
+        }else if(player.length>10){
+            const message = "Your name cannot exceed 10 letters"
+            socket.emit('display-error', message)
+        }else if(roomId.length>30){
+            const message = "Room ID cannot exceed 30 letters"
+            socket.emit('display-error', message)
         }else if(!rooms[roomId]){
             const message = "No such room exists"   
             socket.emit('display-error', message)
