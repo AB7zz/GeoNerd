@@ -38,14 +38,36 @@ io.on('connection', socket => {
         }else if(playerLim==""){
             const message = "Please enter the max number of room members"
             socket.emit('display-error', message)
+        }
+        else if(isNaN(rounds)){
+            console.log(typeof playerLim)
+            const message = "Please enter a digit from 1-50 for the number of rounds"
+            socket.emit('display-error', message)
         }else if(rounds>50){
             const message = "Maximum rounds cannot exceed 50"
+            socket.emit('display-error', message)
+        }else if(rounds==0){
+            const message = "0 rounds is not possible. Please enter atleast 1"
+            socket.emit('display-error', message)
+        }
+        else if(isNaN(playerLim)){
+            const message = "Please enter a digit from 1-100 for maximum number of players"
             socket.emit('display-error', message)
         }else if(playerLim>100){
             const message = "Maximum number of room members cannot exceed 100"
             socket.emit('display-error', message)
+        }else if(playerLim==0){
+            const message = "0 player limit is not possible. Please enter atleast 1"
+            socket.emit('display-error', message)
+        }
+        else if(isNaN(timeLim)){
+            const message = "Please enter a digit from 1-600 for the time limit"
+            socket.emit('display-error', message)
         }else if(timeLim>600){
             const message = "Time limit cannot exceed 600 seconds"
+            socket.emit('display-error', message)
+        }else if(timeLim==0){
+            const message = "Time limit cannot be 0"
             socket.emit('display-error', message)
         }else if(rooms[roomId] && (socket.client.id == rooms[roomId][0][3])){
             socket.emit('host-connected', host, roomId)
