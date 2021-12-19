@@ -97,7 +97,6 @@ io.on('connection', socket => {
             console.log(rooms[roomId])
         }
     })
-
     socket.on('join-room', ({player, roomId}) => {
         rId = roomId
         if(player==""){
