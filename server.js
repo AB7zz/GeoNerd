@@ -3,8 +3,10 @@ const app = express()
 const http = require('http')
 const path = require('path')
 const { emit } = require('process')
-const server = http.createServer(app)
 const socketio = require('socket.io')
+const server = http.createServer(app)
+const PORT = process.env.PORT || 3000
+server.listen(PORT, () => console.log('Server running in http://localhost:3000/')) 
 const {rooms, createRoom, joinRoom, leaveRoom, exitRoom} = require('./util/db.js')
 const {connectedUsers, userConnected} = require('./util/users.js')
 app.use(express.static(path.join(__dirname, 'public')))
@@ -241,5 +243,3 @@ io.on("connect_error", (err) => {
     console.log(`connect_error due to ${err.message}`);
 });
  
-const PORT = process.env.PORT || 3000
-server.listen(PORT, () => console.log('Server running in http://localhost:3000/'))  
