@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Ubuntu:wght@300&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
 
 *{
   margin: 0px;
@@ -583,4 +583,24 @@ main .rowss{
 
 .row .side-bar{
   padding-right: 0 !important;
+}
+
+.zink{
+  width: 50% !important;
+  background: #B83EBC;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  padding-right: 50px !important;
+  padding-left: 50px !important;
+  font-family: 'Secular One', sans-serif;
+  height: 100px;
+  text-decoration: none;
+  border-radius: 20px;
+  color: #fff;
+}
+
+.zink:hover{
+  color: #fff;
+  /* background: #fff;
+  color: #B83EBC; */
 }
