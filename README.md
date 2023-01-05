@@ -4,7 +4,6 @@ Here's the app! https://globeguesser.herokuapp.com/
 1. Open your terminal
 2. Type "npm start"
 
-
 # How to test this app
 
 1. Open localhost:3000. Open another in another tab
