@@ -34,5 +34,5 @@ This is a simple multi-player game where you can challenge your friends on who c
 
 # Happy Coding!
 
-Email:- abhinavcv007@gmail.com for doubts/ suggestions
+
 
