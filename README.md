@@ -1,4 +1,4 @@
-Here's the app! https://globeguesser.herokuapp.com/
+Here's the app! https://geonerd.onrender.com/
 # How to start this app
 
 1. Open your terminal
