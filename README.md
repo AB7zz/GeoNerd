@@ -1,3 +1,5 @@
+Developed this project in collaboration with <a href="https://github.com/Abbaszaid">@Abbaszaid</a>
+
 Here's the app! https://geonerd.onrender.com/
 # How to start this app
 
